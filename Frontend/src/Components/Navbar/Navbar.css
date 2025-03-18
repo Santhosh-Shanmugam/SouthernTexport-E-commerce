@@ -1,0 +1,84 @@
+/* Navbar Container */
+.navbar {
+
+    width: 100wh;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 6px;
+    align-items: center;
+    background-color: #333;
+    padding: 15px;
+}
+.container{
+    display: flex;
+    align-items: center;
+    width:100%;
+    padding: 10px;
+    justify-content: space-between;
+
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.company-name {
+    font-size: 20px;
+    font-weight: bold;
+    font-family:sans-serif;
+    color: white;
+}
+
+.nav-list {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-item:hover {
+    color: #f4a261;
+}
+
+.login-button {
+    transition: 0.5s;
+    padding: 12px;
+    display: flex;
+    min-width: 70px;
+    height: 20px;
+    border-radius: 20px;
+    border: 2px solid transparent; 
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-family: sans-serif;
+    color: white;
+    font-weight: 550;
+    cursor: pointer;
+    background-color: rgb(112, 219, 246);
+}
+
+.login-button:hover {
+    background-color: white;
+    color: black;
+    border-color: rgb(55, 206, 244);
+
+}
