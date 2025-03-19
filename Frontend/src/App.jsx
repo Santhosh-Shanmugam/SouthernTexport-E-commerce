@@ -7,10 +7,11 @@ import Women from './Pages/Women/Women'
 import Men from './Pages/Men/Men'
 import Contact from './Pages/Contact/Contact'
 import Kids from './Pages/Kids/Kids'
+import Footer from './Components/Footer/Footer'
 const App = () => {
   return (
     <div>
-      <Navbar></Navbar>
+       <Navbar></Navbar> 
       
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/contact' element={<Contact></Contact>}></Route>
           {/* <Route path='/' element={<Login></Login>}></Route> */}
         </Routes>
+        <Footer/>
     </div>
   )
 }

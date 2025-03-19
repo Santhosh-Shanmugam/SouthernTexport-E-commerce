@@ -15,9 +15,10 @@ const Navbar = () => {
        <Link to="/women"><li className="nav-item" >Women</li></Link>
        <Link to="/kids"><li className="nav-item" >Kids</li></Link>
        <Link to="/about"><li className="nav-item" >About</li></Link>
-        <div className="login-button">
-        <Link to="/login"><div>Login</div></Link>
+       <Link to="/login">  <div className="login-button">
+       <div>Login</div>
       </div>
+      </Link>
       </ul>
       
       </div>
