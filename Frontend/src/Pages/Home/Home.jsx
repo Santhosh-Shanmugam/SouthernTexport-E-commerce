@@ -202,6 +202,22 @@ const Home = () => {
           ))}
         </div>
       </section>
+      <section className="about-container">
+      <div className="about-content">
+        <h2>About Us</h2>
+        <p>
+          Welcome to our platform! We strive to provide the best services with top-notch 
+          quality and customer satisfaction. Our goal is to deliver excellence through 
+          innovation and dedication.
+        </p>
+        <p>
+          Our team consists of highly skilled professionals who are passionate about 
+          what they do. We believe in continuous improvement and adapting to the latest 
+          trends in technology.
+        </p>
+        <button className="learn-more-btn">Learn More</button>
+      </div>
+    </section>
     </div>
   );
 };
