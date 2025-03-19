@@ -351,3 +351,74 @@ body {
     }
   }
   
+  
+  
+  /* About Section Container */
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  background: linear-gradient(135deg, #0984e3, #00b894);
+  padding: 4rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Content Box */
+.about-content {
+  max-width: 800px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Heading */
+.about-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Paragraph */
+.about-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #ecf0f1;
+  margin-bottom: 1.5rem;
+}
+
+/* Button */
+.learn-more-btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #fff;
+  color: #0984e3;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.learn-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 3rem 1.5rem;
+  }
+
+  .about-content h2 {
+    font-size: 2rem;
+  }
+
+  .about-content p {
+    font-size: 1rem;
+  }
+}
