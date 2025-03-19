@@ -3,6 +3,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { FiYoutube } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 
 import './Footer.css'
 const Footer = () => {
@@ -14,7 +15,7 @@ const Footer = () => {
 
                 <div className="footer-about footer-inside">
                     <h3>About</h3>
-                    <p>Contact Us</p>
+                  <Link to='/contact'> <p>Contact Us</p></Link> 
                     <p>Careers</p>
                     <p>Corporate Information</p>
                     
