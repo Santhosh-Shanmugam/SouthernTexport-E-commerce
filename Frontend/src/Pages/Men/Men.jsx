@@ -1,39 +1,37 @@
-import React from "react";
-import './Men.css'
-import { useContext } from "react";
+import React, { useContext } from "react";
+import "./Men.css";
 import { ShopContext } from "../../Context/ShopContext";
 import Items from "../../Components/Items/Items";
-const { Data } = useContext(ShopContext)
+
 const Men = () => {
+    const { Data } = useContext(ShopContext);
+
+    if (!Data) {
+        return <p>Loading...</p>; // Handle the case where Data is not yet available
+    }
+
     return (
         <div className="items-con">
             <div className="product-display">
-                {
-                    Data.map((item, i) => {
-                        if (props.category === 'men') {
-                            return <Items key={i}
-                                id={Items.id}
-                                image1={Items.image1}
-                                image2={Items.image2}
-                                image3={Items.image3}
-                                name={Items.name}
-                                old_Price={Items.old_Price}
-                                new_Price={Items.new_Price}
-                                offer={Items.offer}
-                                size_options={Items.size_options}
-                                quantity={Items.quantity}
-                            >
+                {Data.filter((item) => item.category === "men").map((item, i) => (
+                    <Items
+                        key={i}
+                        id={item.id}
+                        image1={item.image1}
+                        image2={item.image2}
+                        image3={item.image3}
+                        name={item.name}
+                        old_price={item.old_price}
+                        new_price={item.new_price}
+                        offer={item.offer}
+                        size_options={item.size_options}
+                        product_count={item. product_count}
 
-                            </Items>
-                        }
-                        else{
-                            return null;
-                        }
-                    })
-                }
+                    />
+                ))}
             </div>
         </div>
-    )
+    );
+};
 
-}
 export default Men;

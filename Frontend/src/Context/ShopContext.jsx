@@ -1,8 +1,7 @@
 import React from "react";
 import { createContext } from "react";
 export const ShopContext = createContext(null);
-import Data  from "../assets/Data";
-
+import Data from "../assets/Data";
 const ShopContextProvider = (props) =>{
     const contextValue = {Data};
     return(

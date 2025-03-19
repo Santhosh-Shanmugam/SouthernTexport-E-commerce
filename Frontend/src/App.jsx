@@ -8,6 +8,8 @@ import Men from './Pages/Men/Men'
 import Contact from './Pages/Contact/Contact'
 import Kids from './Pages/Kids/Kids'
 import Footer from './Components/Footer/Footer'
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const App = () => {
   return (
     <div>
