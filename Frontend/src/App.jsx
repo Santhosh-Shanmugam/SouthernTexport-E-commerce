@@ -10,8 +10,7 @@ import Kids from './Pages/Kids/Kids'
 const App = () => {
   return (
     <div>
-      <Navbar></Navbar>
-      
+      <Navbar></Navbar> 
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
           <Route path='/about' element={<About></About>}></Route>
