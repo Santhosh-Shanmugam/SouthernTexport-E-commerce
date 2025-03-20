@@ -1,6 +1,11 @@
 import React from "react";
 import './Items.css'
 const Items = ({ image1, name ,new_price,old_price,offer,product_count,size_options}) => {
+    
+
+
+
+
     return (
     
 
@@ -33,7 +38,9 @@ const Items = ({ image1, name ,new_price,old_price,offer,product_count,size_opti
 
             </div>
             <div className="item-status">
-                <p>{product_count}</p>
+            <p>Size:{size_options}</p>
+
+
             </div>
             </div>
         

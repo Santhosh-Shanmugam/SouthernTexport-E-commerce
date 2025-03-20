@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Home.css';
+import TopSelling from '../TopSelling/TopSelling';
 
 // Categories Data
 const categories = [
@@ -120,6 +121,11 @@ const Home = () => {
         </div>
       </section>
 
+
+
+<div className="top-selling">
+  <TopSelling></TopSelling>
+</div>
       {/* Company Open Comments Section */}
       <section className="comments-section">
         <h2>Share Your Feedback</h2>

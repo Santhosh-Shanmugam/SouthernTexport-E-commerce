@@ -141,7 +141,7 @@ const Data = [
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 50,
-    product_status: "top" // note
+    product_status: "top selling" // note
   },
   {
     id:8,
@@ -159,7 +159,7 @@ const Data = [
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 50,
-    product_status: "top" // note
+    product_status: "top selling" // note
   },
   {
     id:9,
@@ -177,7 +177,7 @@ const Data = [
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 50,
-    product_status: "top" // note
+    product_status: "top selling" // note
   },
   {
     id:10,
@@ -195,7 +195,7 @@ const Data = [
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 50,
-    product_status: "top" // note
+    product_status: "top selling" // note
   },
 
  
