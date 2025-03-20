@@ -109,6 +109,7 @@
     @media (max-width:432px) {
         .footer-con {
             height: 100%;
+            width: 100%;
         }
 
         .footer-inside {

@@ -10,7 +10,6 @@ const Kids =()=>{
 
     return (
         <div className="items-con">
-            <div className="product-display">
                 {Data.filter((item) => item.category === "kids").map((item, i) => (
                     <Items
                     key={i}
@@ -28,7 +27,6 @@ const Kids =()=>{
                 />
                 ))}
             </div>
-        </div>
     );
 }
 export default Kids;

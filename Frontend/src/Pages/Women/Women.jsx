@@ -10,7 +10,6 @@ const Women = () => {
 
   return (
       <div className="items-con">
-          <div className="product-display">
               {Data.filter((item) => item.category === "women").map((item, i) => (
                    <Items
                    key={i}
@@ -28,7 +27,6 @@ const Women = () => {
                />
               ))}
           </div>
-      </div>
   );
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import './Items.css'
 const Items = ({ image1, name ,new_price,old_price,offer,product_count,size_options}) => {
     return (
-        <div className="items-con">
+    
 
             <div className="item-con-all">
 
@@ -36,7 +36,7 @@ const Items = ({ image1, name ,new_price,old_price,offer,product_count,size_opti
                 <p>{product_count}</p>
             </div>
             </div>
-        </div>
+        
     );
 };
 
