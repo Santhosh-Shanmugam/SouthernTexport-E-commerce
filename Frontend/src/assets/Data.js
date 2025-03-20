@@ -6,17 +6,17 @@ const Data = [
     image1: sss,
     image2: sss,
     image3: sss,
-    name: "Product Name",
+    name: "Product",
     old_price: 1000,
     new_price: 800,
     category:"men",
     offer: "20% off",
-    quantity: 50,
+    quantity: 6,
     size: "Large",
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
-    product_count: 50,
+    product_count: 0,
     product_status: "top" // note
   },
   {
@@ -34,7 +34,7 @@ const Data = [
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
-    product_count: 50,
+    product_count: 3,
     product_status: "top" // note
   },
   {
@@ -51,7 +51,7 @@ const Data = [
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
-    product_count: 50,
+    product_count: 0,
     product_status: "top" // note
   },
   {
@@ -68,7 +68,7 @@ const Data = [
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
-    product_count: 50,
+    product_count: 0,
     product_status: "top" // note
   },
   {
@@ -81,12 +81,12 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
-    quantity: 50,
+    quantity: 6,
     size: "Large",
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
-    product_count: 50,
+    product_count: 0,
     product_status: "top" // note
   },
   {

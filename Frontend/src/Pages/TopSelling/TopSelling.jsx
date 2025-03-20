@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../Context/ShopContext";
 import Items from "../../Components/Items/Items";
-
+import './TopSelling.css'
 const TopSelling = () => {
 const { Data } = useContext(ShopContext);
     
   return (
    <>
-   <h3>Top Selling</h3>
+   <h1>Top Selling</h1>
         <div className="items-con">
 
 

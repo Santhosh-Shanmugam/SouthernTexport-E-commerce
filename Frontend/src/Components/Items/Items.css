@@ -17,6 +17,28 @@
     object-fit: cover;
 }
 
+.item-status
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(175, 246, 157);
+    width: 110px;
+    text-align: center;
+    font-weight: 540;
+    border-radius: 1px;
+    height: 30px;
+    position: relative;
+    top: 8px;
+}
+.item-status p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+}
 .item-con-all {
     display: flex;
     align-items:center;
