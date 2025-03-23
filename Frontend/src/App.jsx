@@ -8,6 +8,7 @@ import Men from './Pages/Men/Men'
 import Contact from './Pages/Contact/Contact'
 import Kids from './Pages/Kids/Kids'
 import Footer from './Components/Footer/Footer'
+import TopSelling from './Pages/TopSelling/TopSelling'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InnerDisplay from './Components/InnerDisplay/InnerDisplay'
 
@@ -23,6 +24,8 @@ const App = () => {
           <Route path='/women' element={<Women></Women>}></Route>
           <Route path='/kids' element={<Kids></Kids>}></Route>
           <Route path='/contact' element={<Contact></Contact>}></Route>
+          <Route path='/topselling' element={<TopSelling></TopSelling>}></Route>
+          {/* <Route path='/' element={<Login></Login>}></Route> */}
            <Route path='/product/:productID' element={<InnerDisplay></InnerDisplay>}></Route>
         </Routes>
         <Footer/>

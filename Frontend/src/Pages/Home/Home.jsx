@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Home.css';
 import TopSelling from '../TopSelling/TopSelling';
-
+import { useNavigate } from 'react-router-dom';
 // Categories Data
 const categories = [
   {
@@ -62,7 +62,11 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState([]);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
+  const topseller = () =>{
+    navigate("/topselling")
+  }
   // Comment Submit Handler
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,7 +97,7 @@ const Home = () => {
       <section className="hero">
         <h1>Welcome to Southern TexPort</h1>
         <p>Your one-stop shop for premium textiles and fabrics.</p>
-        <button className="shop-now-btn">Explore Now</button>
+        <button className="shop-now-btn" onClick={topseller}>Explore Now</button>
       </section>
 
       {/* Category Showcase */}
