@@ -1,0 +1,13 @@
+.banner img {
+    width: 99vw;
+    object-fit: cover;
+    height: 95vh;
+}
+
+
+.item-banner-con{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

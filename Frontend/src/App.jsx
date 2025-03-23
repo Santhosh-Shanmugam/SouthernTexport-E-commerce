@@ -9,6 +9,7 @@ import Contact from './Pages/Contact/Contact'
 import Kids from './Pages/Kids/Kids'
 import Footer from './Components/Footer/Footer'
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import InnerDisplay from './Components/InnerDisplay/InnerDisplay'
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
           <Route path='/women' element={<Women></Women>}></Route>
           <Route path='/kids' element={<Kids></Kids>}></Route>
           <Route path='/contact' element={<Contact></Contact>}></Route>
-          {/* <Route path='/' element={<Login></Login>}></Route> */}
+           <Route path='/product/:productID' element={<InnerDisplay></InnerDisplay>}></Route>
         </Routes>
         <Footer/>
     </div>

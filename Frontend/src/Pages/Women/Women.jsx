@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../Context/ShopContext";
 import Items from "../../Components/Items/Items";
+import stpWomen from '../assets-page/stpWomen.png'
+import './Women.css'
 const Women = () => {
   const { Data } = useContext(ShopContext);
 
@@ -9,6 +11,11 @@ const Women = () => {
   }
 
   return (
+    <div className="item-banner-con">
+
+        <div className="banner">
+            <img src={stpWomen}></img>
+        </div>
       <div className="items-con">
               {Data.filter((item) => item.category === "women").map((item, i) => (
                    <Items
@@ -23,10 +30,11 @@ const Women = () => {
                    offer={item.offer}
                    size_options={item.size_options}
                    product_count={item. product_count}
-
-               />
-              ))}
+                   
+                   />
+                ))}
           </div>
+                </div>
   );
 }
 

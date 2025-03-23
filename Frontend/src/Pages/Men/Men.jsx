@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import "./Men.css";
 import { ShopContext } from "../../Context/ShopContext";
 import Items from "../../Components/Items/Items";
+import stpMen from '../assets-page/stpMen.png'
+
 
 const Men = () => {
     const { Data } = useContext(ShopContext);
@@ -11,6 +13,11 @@ const Men = () => {
     }
 
     return (
+         <div className="item-banner-con">
+        
+                <div className="banner">
+                    <img src={stpMen}></img>
+                </div>
         <div className="items-con">
            
                 {Data.filter((item) => item.category === "men").map((item, i) => (
@@ -29,7 +36,7 @@ const Men = () => {
 
                     />
                 ))}
-       
+       </div>
         </div>
     );
 };
