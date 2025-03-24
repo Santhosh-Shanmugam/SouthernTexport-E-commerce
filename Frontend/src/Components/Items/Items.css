@@ -53,7 +53,7 @@ Link{
     width: 300px;
     margin-left: 20px;
     margin-bottom: 30px;
-    height: 565px;
+    height: 560px;
     background-color: rgb(233, 237, 237);
     border-radius: 6px;
     text-decoration: none; 
@@ -78,7 +78,7 @@ Link{
     align-items: center;
     justify-content:start;
     position: relative;
-    top: -15px;
+    top: -12px;
     flex-direction: row;
     margin: 0;
     gap: 30px;
@@ -196,7 +196,7 @@ Link{
         flex-direction: column;
         width: 280px;
         margin-bottom: 30px;
-        height: 550px;
+        height: 545px;
         background-color: rgb(233, 237, 237);
         border-radius: 6px;
     }
