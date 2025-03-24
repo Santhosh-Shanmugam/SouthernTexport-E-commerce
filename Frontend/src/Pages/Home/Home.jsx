@@ -4,6 +4,34 @@ import './Home.css';
 import TopSelling from '../TopSelling/TopSelling';
 import { useNavigate } from 'react-router-dom';
 
+
+const testimonials = [
+  {
+    id: 1,
+    name: "Sana",
+    role: "Fashion Designer",
+    content:
+      "Southern TexPort has been my go-to supplier for premium textiles for over 5 years. Their cotton fabrics are unmatched in quality and consistency.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "Dhurai Murgan",
+    role: "Designer",
+    content:
+      "The upholstery fabrics from Southern TexPort have transformed my design business. My clients love the quality and durability.",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Mayailsamy",
+    role: "Small Business Owner",
+    content:
+      "As a small business owner creating handmade products, finding reliable fabric suppliers was challenging until I discovered Southern TexPort.",
+    rating: 4,
+  },
+];
+
 // Categories Data
 const categories = [
   {
@@ -91,6 +119,49 @@ const Home = () => {
       >
         <TopSelling />
       </motion.div>
+
+
+           {/* Testimonials Section with Slide In Animation */}
+      <motion.section
+        className="testimonial-section"
+        initial={{ x: "-100vw" }}
+        animate={{ x: 0 }}
+        transition={{ type: "spring", stiffness: 50 }}
+      >
+        <h2>What Our Customers Say</h2>
+        <div className="testimonial-grid">
+          {testimonials.map((testimonial) => (
+            <motion.div
+              key={testimonial.id}
+              className="testimonial-card"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="testimonial-content">
+                <div className="rating">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span
+                      key={i}
+                      className={`star ${i < testimonial.rating ? "filled" : ""}`}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <p className="testimonial-text">"{testimonial.content}"</p>
+                <div className="testimonial-author">
+                  <div className="avatar">{testimonial.name.charAt(0)}</div>
+                  <div>
+                    <h4>{testimonial.name}</h4>
+                    <p>{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
 
       {/* About Us Section */}
       <motion.section 
