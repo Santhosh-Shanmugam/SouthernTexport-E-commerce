@@ -1,53 +1,72 @@
-import React from 'react'
-import './Contact.css'
+import React, { useState } from 'react';
+import './Contact.css';
 
 const Contact = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    setIsLoading(true);
+    
+    const formData = new FormData();
+    formData.append('access_key', 'a8cf2cad-503d-4abc-8d1a-335fd6ad347d');
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('message', message);
 
-    formData.append("access_key", "a8cf2cad-503d-4abc-8d1a-335fd6ad347d");
-
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: json
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
     }).then((res) => res.json());
 
+    setIsLoading(false);
+    
     if (res.success) {
-      console.log("Success", res);
       alert(res.message);
+      setName('');
+      setEmail('');
+      setMessage('');
     }
   };
+
   return (
-    <div id='contact' className="contact">
-   <div className="contact-title">
-    <h1>Get in touch</h1>
+    <section id='contact' className='contact-section'>
+      <h2>Get in Touch</h2>
+      <p>We value your feedback! Send us a message and we’ll get back to you.</p>
+      
+      <form onSubmit={onSubmit} className='contact-form'>
+        <input
+          type='text'
+          placeholder='Your Name'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className='contact-input'
+        />
+        <input
+          type='email'
+          placeholder='Your Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className='contact-input'
+        />
+        <textarea
+          placeholder='Your Message'
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+          className='contact-textarea'
+        />
+        <button type='submit' disabled={isLoading} className='contact-btn'>
+          {isLoading ? 'Sending...' : 'Submit Message'}
+        </button>
+      </form>
+    </section>
+  );
+};
 
-   </div>
-   <div className="contact-sec">
- 
-    <form onSubmit={onSubmit} className='contact-right'>
-        <label htmlFor=''>Your Name</label>
-        <input type='text' placeholder='Enter your name' name='name'></input>
-        <label htmlFor=''>Your Email</label>
-        <input type='email' placeholder='Enter your email' name='email'></input>
-        <label htmlFor=''>Write the message here</label>
-        <textarea name='message' rows='8' placeholder='Enter your message'></textarea>
-            <button  className="button-contact" type='submit' >Submit now</button>
-       
-
-          </form>
-        </div>
-
-        </div>
-  )
-}
-
-export default Contact
+export default Contact;
