@@ -11,10 +11,10 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
-  
+  color:"blue",
     full_name: "Product Name - Full Details",
     rating: 4.5,
-    size_options: [" X ", " XL ", " L ", " M "],
+    size_options: ["S","M","L","XL","XLL"],
     product_count: 0,
     product_status: "top"
   },
@@ -28,6 +28,8 @@ const Data = [
     new_price: 800,
     category:"women",
     offer: "20% off",
+    color:"blue",
+
   
     full_name: "Product Name - Full Details",
     rating: 4.5,
@@ -46,6 +48,8 @@ const Data = [
     category:"women",
     full_name: "Product Name - Full Details",
     rating: 4.5,
+    color:"blue",
+
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 0,
     product_status: "top" // note
@@ -59,6 +63,8 @@ const Data = [
     old_price: 1000,
     new_price: 800,
     offer: "20% off",
+    color:"blue",
+
 
     category:"kids",
     full_name: "Product Name - Full Details",
@@ -77,6 +83,7 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
+    color:"blue",
 
     full_name: "Product Name - Full Details",
     rating: 4.5,
@@ -94,7 +101,8 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
-   
+    color:"blue",
+
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
@@ -110,6 +118,8 @@ const Data = [
     old_price: 1000,
     new_price: 800,
     category:"men",
+    color:"blue",
+
     offer: "20% off",
     quantity: 50,
     size: "Large",
@@ -129,6 +139,8 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
+    color:"blue",
+
     quantity: 50,
     size: "Large",
     full_name: "Product Name - Full Details",
@@ -147,6 +159,8 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
+    color:"blue",
+
     quantity: 50,
     size: "Large",
     full_name: "Product Name - Full Details",
@@ -167,6 +181,8 @@ const Data = [
     offer: "20% off",
     quantity: 50,
     size: "Large",
+    color:"blue",
+
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
@@ -181,6 +197,8 @@ const Data = [
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
+    color:"blue",
+
     category:"men",
     offer: "20% off",
     quantity: 50,
