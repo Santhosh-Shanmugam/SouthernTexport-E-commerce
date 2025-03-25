@@ -6,18 +6,17 @@ const Data = [
     image1: sss,
     image2: sss,
     image3: sss,
-    name: "Product",
+    name: "Blue T",
     old_price: 1000,
     new_price: 800,
     category:"men",
     offer: "20% off",
-    quantity: 6,
-    size: "Large",
+  
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 0,
-    product_status: "top" // note
+    product_status: "top"
   },
   {
     id:1,
@@ -29,8 +28,7 @@ const Data = [
     new_price: 800,
     category:"women",
     offer: "20% off",
-    quantity: 50,
-    size: "Large",
+  
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
@@ -46,8 +44,6 @@ const Data = [
     old_price: 1000,
     new_price: 800,
     category:"women",
-    offer: "20%",
-    size: "Large",
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
@@ -62,9 +58,9 @@ const Data = [
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
-    category:"kids",
     offer: "20% off",
-    size: "Large",
+
+    category:"kids",
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
@@ -81,8 +77,7 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
-    quantity: 6,
-    size: "Large",
+
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
@@ -99,8 +94,7 @@ const Data = [
     new_price: 800,
     category:"men",
     offer: "20% off",
-    quantity: 50,
-    size: "Large",
+   
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
