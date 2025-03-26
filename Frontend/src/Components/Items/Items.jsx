@@ -53,7 +53,7 @@ const Items = ({ id, image1, name, new_price, old_price, offer, product_count, s
                         color: "black",
                         padding: "5px 10px",
                         borderRadius: "2px",
-
+                        alignItems : "center",
 
                     }}
                 >
