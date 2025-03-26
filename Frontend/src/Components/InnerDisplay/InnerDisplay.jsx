@@ -6,6 +6,10 @@ import { useParams } from 'react-router-dom';
 import { MdLocalOffer } from "react-icons/md";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FaShoppingCart } from "react-icons/fa";
+import Rating from '../Rating/Rating';
+import { Ri24HoursFill } from "react-icons/ri";
+import { IoIosTrophy } from "react-icons/io";
+import { RiSecurePaymentLine } from "react-icons/ri";
 
 const InnerDisplay = () => {
 
@@ -53,18 +57,21 @@ const InnerDisplay = () => {
 
         <div className="inner-con-details">
           <p>{product.full_name}</p>
-          <p>{product.rating}</p>
+          <div className="inner-rating">
+          <Rating  rating={product.rating} ></Rating>
+
+          </div>
           <hr></hr>
           <div className="inner-price">
-          <p className="price-name">Spcial Price:</p>
+            <p className="price-name">Spcial Price:</p>
             <div className="new_p">
 
-          <p>₹{product.new_price}</p>
+              <p>₹{product.new_price}</p>
             </div>
-         <div className="inner-old-p">
-          <p>₹{product.old_price}</p>
+            <div className="inner-old-p">
+              <p>₹{product.old_price}</p>
 
-         </div>
+            </div>
 
           </div>
           <p>Inclusive of all taxes</p>
@@ -79,16 +86,13 @@ const InnerDisplay = () => {
           ))}
           </div>
           <div className="inner-colors">
-            <h2>Color</h2>
             <div className="inner-color">
-              <div className="">
 
-                <p>{product.color}</p>
+              <div style={{ display: 'flex', color: 'black',alignItems:'center',justifyContent:'center',gap:'15px' }}>
+                <h3>Color:</h3><p style={{ color: 'blue' }}>{product.color}</p>
+                <h3>Fabric:</h3><p style={{ color: 'blue' }}>{product.fabric}</p>
               </div>
-              <div className="">
 
-                <img src={product.image1}></img>
-              </div>
             </div>
 
 
@@ -98,11 +102,10 @@ const InnerDisplay = () => {
           <div className="inner-con-right-icons">
 
             <CiDeliveryTruck className="inner-icon-right" />
-            <FaShoppingCart  className="inner-icon-right" />
-            <CiDeliveryTruck className="inner-icon-right" />
-            <CiDeliveryTruck className="inner-icon-right" />
-            <CiDeliveryTruck className="inner-icon-right" />
-            <CiDeliveryTruck className="inner-icon-right" />
+            <FaShoppingCart className="inner-icon-right2" />
+            <Ri24HoursFill className="inner-icon-right" />
+            <IoIosTrophy className="inner-icon-right"  />
+            <RiSecurePaymentLine className="inner-icon-right" />
 
           </div>
           <hr></hr>
@@ -116,7 +119,7 @@ const InnerDisplay = () => {
       <div className="inner-con-last">
         <p>efgrgtgthr</p>
       </div>
-    </div>
+    </div >
   )
 }
 

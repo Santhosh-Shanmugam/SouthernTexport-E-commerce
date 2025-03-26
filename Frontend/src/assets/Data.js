@@ -12,6 +12,7 @@ const Data = [
     category:"men",
     offer: "20% off",
   color:"blue",
+  fabric:"Cotton",
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: ["S","M","L","XL","XLL"],
@@ -29,6 +30,7 @@ const Data = [
     category:"women",
     offer: "20% off",
     color:"blue",
+    fabric:"Cotton",
 
   
     full_name: "Product Name - Full Details",
@@ -49,6 +51,7 @@ const Data = [
     full_name: "Product Name - Full Details",
     rating: 4.5,
     color:"blue",
+    fabric:"Cotton",
 
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 0,
@@ -65,6 +68,7 @@ const Data = [
     offer: "20% off",
     color:"blue",
 
+    fabric:"Cotton",
 
     category:"kids",
     full_name: "Product Name - Full Details",
@@ -84,6 +88,7 @@ const Data = [
     category:"men",
     offer: "20% off",
     color:"blue",
+    fabric:"Cotton",
 
     full_name: "Product Name - Full Details",
     rating: 4.5,
@@ -102,6 +107,8 @@ const Data = [
     category:"men",
     offer: "20% off",
     color:"blue",
+    fabric:"Cotton",
+
 
     full_name: "Product Name - Full Details",
     rating: 4.5,
@@ -119,6 +126,7 @@ const Data = [
     new_price: 800,
     category:"men",
     color:"blue",
+    fabric:"Cotton",
 
     offer: "20% off",
     quantity: 50,
@@ -140,6 +148,7 @@ const Data = [
     category:"men",
     offer: "20% off",
     color:"blue",
+    fabric:"Cotton",
 
     quantity: 50,
     size: "Large",
@@ -160,6 +169,7 @@ const Data = [
     category:"men",
     offer: "20% off",
     color:"blue",
+    fabric:"Cotton",
 
     quantity: 50,
     size: "Large",
@@ -182,6 +192,7 @@ const Data = [
     quantity: 50,
     size: "Large",
     color:"blue",
+    fabric:"Cotton",
 
     full_name: "Product Name - Full Details",
     rating: 4.5,
@@ -198,6 +209,7 @@ const Data = [
     old_price: 1000,
     new_price: 800,
     color:"blue",
+    fabric:"Cotton",
 
     category:"men",
     offer: "20% off",

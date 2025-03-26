@@ -1,0 +1,43 @@
+.rating-all{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 120px;
+}
+.rating-container img{
+    height: 30px;
+    width: 30px;
+    gap: 5px;
+
+}
+.rating-num{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+
+}
+
+.star{
+    color:rgb(0, 0, 0);
+    width: 30px;
+    height: 30px;
+}
+.rating-num{
+    color: #000;
+}
+.rating-all-inner{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    flex-direction: row;
+    gap: 20px;
+    
+}
+.rating-container
+{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width: 100%;
+    flex-direction: row;   
+}
