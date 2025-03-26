@@ -17,8 +17,10 @@
 .inner-con{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     flex-direction: row;
+    place-items: center;
 }
 .inner-con-left{
     display: flex;
@@ -189,6 +191,129 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(90, 106, 120);
+    border: 2px solid rgb(146, 145, 145);
+    min-width: 350px;
+    flex-direction: column;
+    border-radius: 12px;
+    margin-bottom: 50px;
+}
+.last-con-price{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+
+}
+.last-con-price{
+    font-size: 22px;
+    font-weight: 600;
+}
+.inner-con-last span{
+    color: blue;
+    font-size: 20px;
+
+
+}
+
+.add-location{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    height: 50px;
+    background-color:rgb(219, 253, 252);
+    gap: 15px;
+    margin-top: 20px;
+}
+.add-location h4{
+    font-size: 20px;
+}
+.add-location-icon{
+    width: 40px;
+    height: 40px;
+}
+.stock-left-last-p{
+    font-size: 20px;
+    font-weight: 500;
+    color: red;
+}
+.inner-con-last-all-items{
+    display: flex;
+    align-items:start;
+    justify-content: start;
+    flex-direction: column;
+    line-height: 23px;
+}
+.quantity-con-last{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+
+
+}
+.quantity-con-last input{
+    width: 60px;
+    height: 50px;
+    border-radius: 6px;
+
+}
+input::placeholder, 
+textarea::placeholder {
+  font-size: 19px; 
+}
+.buy-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 50px;
+    background-color: rgb(242, 255, 96);
+    margin-bottom: 15px;
+    font-weight: 600;
+    border-radius: 26px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.buy-btn:hover{
+    transform: scale(1.03);
+    background-color: rgb(235, 252, 42);
+
+
+}
+.add-cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 50px;
+    background-color: rgb(255, 213, 0);
+    margin-bottom: 25px;
+    border-radius: 26px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.5s;
+
+}
+
+
+.add-cart:hover{
+    transform: scale(1.03);
+    background-color: rgb(255, 200, 0);
+
+
+}
+.buy-btn:hover, .add-cart:hover {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.button-buy-cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }

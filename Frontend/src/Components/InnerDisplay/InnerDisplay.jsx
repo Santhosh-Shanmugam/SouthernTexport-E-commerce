@@ -10,6 +10,7 @@ import Rating from '../Rating/Rating';
 import { Ri24HoursFill } from "react-icons/ri";
 import { IoIosTrophy } from "react-icons/io";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import { FaMapLocationDot } from "react-icons/fa6";
 
 const InnerDisplay = () => {
 
@@ -58,7 +59,7 @@ const InnerDisplay = () => {
         <div className="inner-con-details">
           <p>{product.full_name}</p>
           <div className="inner-rating">
-          <Rating  rating={product.rating} ></Rating>
+            <Rating rating={product.rating} ></Rating>
 
           </div>
           <hr></hr>
@@ -88,7 +89,7 @@ const InnerDisplay = () => {
           <div className="inner-colors">
             <div className="inner-color">
 
-              <div style={{ display: 'flex', color: 'black',alignItems:'center',justifyContent:'center',gap:'15px' }}>
+              <div style={{ display: 'flex', color: 'black', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
                 <h3>Color:</h3><p style={{ color: 'blue' }}>{product.color}</p>
                 <h3>Fabric:</h3><p style={{ color: 'blue' }}>{product.fabric}</p>
               </div>
@@ -104,7 +105,7 @@ const InnerDisplay = () => {
             <CiDeliveryTruck className="inner-icon-right" />
             <FaShoppingCart className="inner-icon-right2" />
             <Ri24HoursFill className="inner-icon-right" />
-            <IoIosTrophy className="inner-icon-right"  />
+            <IoIosTrophy className="inner-icon-right" />
             <RiSecurePaymentLine className="inner-icon-right" />
 
           </div>
@@ -117,7 +118,66 @@ const InnerDisplay = () => {
 
       </div>
       <div className="inner-con-last">
-        <p>efgrgtgthr</p>
+        <div className="inner-con-last-all-items">
+
+          <p className="last-con-price">₹{product.new_price}</p>
+          <div className="stock-left-last">
+            <p className="stock-left-last-p">Stock Left:{product.product_count}</p>
+          </div>
+          <div className="">
+
+          <span>{product.delivery}</span>
+          </div>
+          <div className="add-location">
+
+            <FaMapLocationDot className="add-location-icon" />
+
+
+            <h4>Add Location</h4>
+          </div>
+          <div className="quantity-con-last">
+            <p>
+              <input
+                type="number"
+                placeholder="Qty"
+                min="1"
+                max="50"
+                onChange={(e) => {
+                  let value = parseInt(e.target.value);
+
+                  if (isNaN(value) || value < 1) {
+                    value = 1;
+                  } else if (value > 50) {
+                    value = 50;
+                  }
+
+                  e.target.value = value;
+                }}
+              />
+            </p>
+          </div>
+
+
+
+          <div className="button-buy-cart">
+            <div className="buy-btn">
+              <p>BUY</p>
+
+            </div>
+            <div className="add-cart">
+               <p>ADD TO CART</p>
+            </div>
+          </div>
+
+
+        </div>
+
+
+
+
+
+
+
       </div>
     </div >
   )

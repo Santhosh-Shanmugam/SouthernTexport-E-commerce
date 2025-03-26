@@ -13,6 +13,7 @@ const Data = [
     offer: "20% off",
   color:"blue",
   fabric:"Cotton",
+  delivery:"Free Delivery",
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: ["S","M","L","XL","XLL"],
@@ -32,7 +33,8 @@ const Data = [
     color:"blue",
     fabric:"Cotton",
 
-  
+    delivery:"Free Delivery",
+
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],
@@ -52,6 +54,7 @@ const Data = [
     rating: 4.5,
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     size_options: [" X ", " XL ", " L ", " M "],
     product_count: 0,
@@ -69,6 +72,7 @@ const Data = [
     color:"blue",
 
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     category:"kids",
     full_name: "Product Name - Full Details",
@@ -89,6 +93,7 @@ const Data = [
     offer: "20% off",
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     full_name: "Product Name - Full Details",
     rating: 4.5,
@@ -108,6 +113,7 @@ const Data = [
     offer: "20% off",
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
 
     full_name: "Product Name - Full Details",
@@ -127,6 +133,7 @@ const Data = [
     category:"men",
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     offer: "20% off",
     quantity: 50,
@@ -149,6 +156,7 @@ const Data = [
     offer: "20% off",
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     quantity: 50,
     size: "Large",
@@ -170,6 +178,7 @@ const Data = [
     offer: "20% off",
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     quantity: 50,
     size: "Large",
@@ -193,6 +202,7 @@ const Data = [
     size: "Large",
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     full_name: "Product Name - Full Details",
     rating: 4.5,
@@ -210,6 +220,7 @@ const Data = [
     new_price: 800,
     color:"blue",
     fabric:"Cotton",
+    delivery:"Free Delivery",
 
     category:"men",
     offer: "20% off",
