@@ -1,5 +1,7 @@
 body{
-  background-color: black;
+  background-color: rgb(255, 255, 255);
+  margin: 0;
+  
 }
 Link{
   text-decoration: none;

@@ -1,6 +1,6 @@
 /* Navbar Container */
 .navbar {
-    width: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -136,5 +136,40 @@
 
     .nav-list {
         display: none;
+    }
+}
+@media (max-width: 400px) {
+    .menu-icon {
+        display: block;
+        font-size: 20px; /* Adjust size for smaller screens */
+    }
+
+    .nav-list {
+        display: none;
+    }
+
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .company-name {
+        font-size: 14px;
+    }
+
+    .login-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        right: 0;
+        top: 45px;
+    }
+
+    .dropdown-menu li {
+        font-size: 14px;
+        padding: 8px;
     }
 }
