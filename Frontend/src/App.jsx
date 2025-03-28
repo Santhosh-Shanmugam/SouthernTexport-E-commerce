@@ -11,7 +11,8 @@ import Footer from './Components/Footer/Footer'
 import TopSelling from './Pages/TopSelling/TopSelling'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import InnerDisplay from './Components/InnerDisplay/InnerDisplay'
-
+import Login from './Pages/Auth/Login/Login'
+import Signup from './Pages/Auth/Signup/Signup'
 const App = () => {
   return (
     <div>
@@ -25,7 +26,9 @@ const App = () => {
           <Route path='/kids' element={<Kids></Kids>}></Route>
           <Route path='/contact' element={<Contact></Contact>}></Route>
           <Route path='/topselling' element={<TopSelling></TopSelling>}></Route>
-          {/* <Route path='/' element={<Login></Login>}></Route> */}
+          <Route path='/login' element={<Login></Login>}></Route>
+          <Route path='/signup' element={<Signup></Signup>}></Route>
+
            <Route path='/product/:productID' element={<InnerDisplay></InnerDisplay>}></Route>
         </Routes>
         <Footer/>
