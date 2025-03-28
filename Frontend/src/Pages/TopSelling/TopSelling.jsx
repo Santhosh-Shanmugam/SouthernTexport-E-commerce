@@ -7,7 +7,7 @@ const { Data } = useContext(ShopContext);
     
   return (
    <>
-   <h1>Top Selling</h1>
+   <h1 className="items-head">Top Selling</h1>
         <div className="items-con">
 
 
