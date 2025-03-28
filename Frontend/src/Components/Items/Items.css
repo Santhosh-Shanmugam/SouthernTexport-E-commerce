@@ -4,22 +4,43 @@ a {
 }
 
 .item-con-all {
-    /* font-size: large; */
-    /* text-decoration: none; */
     width: 280px;
+    max-width: 100%; /* Ensures container doesn't overflow on smaller screens */
     border: 1px solid #ddd;
     border-radius: 12px;
     background: linear-gradient(135deg, #ffffff, #f9f9f9);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: 
+        transform 0.3s ease-in-out, 
+        box-shadow 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    
+    /* Prevent text overflow */
+    text-overflow: ellipsis;
+    
+    /* Improved cross-browser compatibility */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.item-con-all:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure internal content doesn't cause overflow */
+.item-con-all * {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-con-all:hover {
@@ -174,5 +195,13 @@ a {
 @media (max-width: 600px) {
     .items-con {
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .item-con-all {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
     }
 }

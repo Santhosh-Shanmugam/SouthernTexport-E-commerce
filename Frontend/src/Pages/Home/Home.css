@@ -316,3 +316,27 @@
     font-size: 1rem;
   }
 }
+@media (max-width: 768px) {
+  .home-page {
+    margin-top: 2vh;
+    padding: 0 3%; /* Reduce padding on smaller screens */
+  }
+ .category-section{
+  
+ }
+  .category-grid,
+  .testimonial-grid {
+    grid-template-columns: 1fr; /* Stack on very small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    width: 95%; /* More width on smallest screens */
+    padding: 2rem 0.5rem;
+  }
+
+  .shop-now-btn {
+    padding: 0.7rem 1.5rem;
+  }
+}
