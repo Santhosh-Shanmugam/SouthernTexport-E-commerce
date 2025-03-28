@@ -4,7 +4,7 @@
 
     display: flex;
     flex-direction: column;
-
+    
     margin: 0;
   }
   
@@ -321,9 +321,7 @@
     margin-top: 2vh;
     padding: 0 3%; /* Reduce padding on smaller screens */
   }
- .category-section{
-  
- }
+
   .category-grid,
   .testimonial-grid {
     grid-template-columns: 1fr; /* Stack on very small screens */
