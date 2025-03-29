@@ -18,6 +18,7 @@
     font-weight: 700;
 }
 
+<<<<<<< HEAD
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
     .items-con {
@@ -48,3 +49,40 @@
         font-size: clamp(1.5rem, 4vw, 2.5rem);
     }
 }
+=======
+@media screen and (max-width: 1024px) {
+    .items-con {
+        grid-template-columns: repeat(200px, 1fr);
+        margin-left: 5vh;
+        margin-right: 4vh;
+    }
+
+    .items-head {
+        font-size: 2rem;
+        margin-left: 17vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .items-con {
+        grid-template-columns: repeat(200px, 1fr);
+        margin-left: 1vh;
+        margin-right: 2vh;
+    }
+
+    .items-head {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .items-con {
+        grid-template-columns: repeat(180px, 1fr);
+        padding: 10px;
+    }
+
+    .items-head {
+        font-size: 1.5rem;
+    }
+}
+>>>>>>> c3d790557c97c07708f939d705448a911c408261
