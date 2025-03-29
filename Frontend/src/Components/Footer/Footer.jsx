@@ -48,7 +48,7 @@ const Footer = () => {
                     <p>Khaderpet,Tiruppur-641601</p>
                     <p>Tamil Nadu,India</p>
 
-
+{/* // */}
                 </div>
             </div>
             <div className="footer-bottom">
