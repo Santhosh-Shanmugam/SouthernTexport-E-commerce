@@ -1,11 +1,13 @@
 import sss from './sss.webp'
+import ss2 from './ss2.webp'
+import ss3 from './ss3.webp'
 
 const Data = [
   {
     id:0,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Blue T",
     old_price: 1000,
     new_price: 800,
@@ -23,8 +25,8 @@ const Data = [
   {
     id:1,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -44,8 +46,8 @@ const Data = [
   {
     id:2,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -63,8 +65,8 @@ const Data = [
   {
     id:3,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -84,8 +86,8 @@ const Data = [
   {
     id:4,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -104,8 +106,8 @@ const Data = [
   {
     id:5,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -125,8 +127,8 @@ const Data = [
   {
     id:6,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -147,8 +149,8 @@ const Data = [
   {
     id:7,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -169,8 +171,8 @@ const Data = [
   {
     id:8,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -191,8 +193,8 @@ const Data = [
   {
     id:9,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
@@ -213,8 +215,8 @@ const Data = [
   {
     id:10,
     image1: sss,
-    image2: sss,
-    image3: sss,
+    image2: ss2,
+    image3: ss3,
     name: "Product Name",
     old_price: 1000,
     new_price: 800,
