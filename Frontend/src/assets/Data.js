@@ -223,11 +223,9 @@ const Data = [
     color:"blue",
     fabric:"Cotton",
     delivery:"Free Delivery",
-
     category:"men",
     offer: "20% off",
     quantity: 50,
-    size: "Large",
     full_name: "Product Name - Full Details",
     rating: 4.5,
     size_options: [" X ", " XL ", " L ", " M "],

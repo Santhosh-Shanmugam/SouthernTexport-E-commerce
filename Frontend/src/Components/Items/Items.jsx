@@ -33,7 +33,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
         if (hovering) {
             interval = setInterval(() => {
                 setCurrentIndex((prev) => (prev + 1) % images.length);
-            }, 1500);
+            }, 1800);
         } else {
             setCurrentIndex(0);
         }
@@ -59,6 +59,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
                             objectFit: 'cover',
                             transition: 'opacity 0.5s ease-in-out',
                             borderRadius: '12px',
+                            transition:"0.3s",
                         }}
                     />
                 </div>

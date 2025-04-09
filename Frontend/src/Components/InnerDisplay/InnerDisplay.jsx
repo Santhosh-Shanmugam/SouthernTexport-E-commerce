@@ -16,11 +16,34 @@ const InnerDisplay = () => {
   const { productID } = useParams();
   const product = Data.find((e) => e.id === Number(productID));
 
- 
+  const [currentIndex, setCurrentIndex] = useState(0);
   const handleBuy = () => {
     console.log("Buying", selectCount, "items of", product.full_name);
   };
+  const media = [
+    { type: "image", src: product.image1 },
+    { type: "image", src: product.image2 },
+    { type: "image", src: product.image3 },
+  ];
+  
 
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 4400);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % media.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? media.length - 1 : prevIndex - 1
+    );
+  };
   return (
     <div className="inner-con">
       <div className="inner-con-left">
@@ -30,7 +53,24 @@ const InnerDisplay = () => {
           <img src={product.image3} alt="sample3" />
         </div>
         <div className="left-main-image">
-          <img src={product.image1} alt="main" />
+        <div className="imageslider">
+      <div className="carousel">
+        <div className="carousel-container">
+            <img
+              src={media[currentIndex].src}
+              alt={`Slide ${currentIndex + 1}`}
+              className="carousel-image"
+            />
+          
+        </div>
+        <button className="prev" onClick={prevSlide}>
+          &#10094;
+        </button>
+        <button className="next" onClick={nextSlide}>
+          &#10095;
+        </button>
+      </div>
+    </div>
         </div>
       </div>
 
