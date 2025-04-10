@@ -3,15 +3,19 @@ import { ShopContext } from "../../Context/ShopContext";
 import Items from "../../Components/Items/Items";
 import './TopSelling.css'
 const TopSelling = () => {
-const { Data } = useContext(ShopContext);
-    
+  const { all_product } = useContext(ShopContext);
+
+  if (!all_product) {
+    return <p>Loading...</p>;
+}
+
   return (
    < div className='top-iteps-disp'>
    <h1 className="items-head">Top Selling</h1>
         <div className="items-con">
 
 
-        {Data.filter((item) => item.product_status === "top selling").map((item, i) => (
+        {all_product.filter((item) => item.product_status === "Top Selling").map((item, i) => (
                    <Items
                    key={i}
                    id={item.id}

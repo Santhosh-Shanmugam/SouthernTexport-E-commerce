@@ -12,9 +12,9 @@ import { FaMapLocationDot } from "react-icons/fa6";
 
 const InnerDisplay = () => {
   const [selectCount, setSelectCount] = useState(1); // Default to 1
-  const { Data } = useContext(ShopContext);
+  const { all_product } = useContext(ShopContext);
   const { productID } = useParams();
-  const product = Data.find((e) => e.id === Number(productID));
+  const product = all_product.find((e) => e.id === Number(productID));
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleBuy = () => {

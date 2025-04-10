@@ -4,11 +4,12 @@ import Items from "../../Components/Items/Items";
 import stpWomen from '../assets-page/stpWomen.png'
 import './Women.css'
 const Women = () => {
-  const { Data } = useContext(ShopContext);
+  const { all_product } = useContext(ShopContext);
 
-  if (!Data) {
-      return <p>Loading...</p>; // Handle the case where Data is not yet available
-  }
+  if (!all_product) {
+    return <p>Loading...</p>;
+}
+
 
   return (
     <div className="item-banner-con">
@@ -17,7 +18,7 @@ const Women = () => {
             <img src={stpWomen}></img>
         </div>
       <div className="items-con">
-              {Data.filter((item) => item.category === "women").map((item, i) => (
+              {all_product.filter((item) => item.category === "Women").map((item, i) => (
                    <Items
                    key={i}
                    id={item.id}

@@ -6,21 +6,20 @@ import stpMen from '../assets-page/stpMen.png'
 
 
 const Men = () => {
-    const { Data } = useContext(ShopContext);
-
-    if (!Data) {
-        return <p>Loading...</p>; // Handle the case where Data is not yet available
-    }
-
+     const { all_product } = useContext(ShopContext);
+   
+     if (!all_product) {
+       return <p>Loading...</p>;
+   }
+   
     return (
-         <div className="item-banner-con">
-        
-                <div className="banner">
-                    <img src={stpMen}></img>
-                </div>
-        <div className="items-con">
-           
-                {Data.filter((item) => item.category === "men").map((item, i) => (
+        <div className="item-banner-con">
+
+            <div className="banner">
+                <img src={stpMen}></img>
+            </div>
+            <div className="items-con">
+                {all_product.filter((item) => item.category === "Men").map((item, i) => (
                     <Items
                         key={i}
                         id={item.id}
@@ -32,11 +31,11 @@ const Men = () => {
                         new_price={item.new_price}
                         offer={item.offer}
                         size_options={item.size_options}
-                        product_count={item. product_count}
+                        product_count={item.product_count}
 
                     />
                 ))}
-       </div>
+            </div>
         </div>
     );
 };
