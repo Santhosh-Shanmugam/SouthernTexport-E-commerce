@@ -6,13 +6,22 @@ const Review = ({ Reviews ,ProductName}) => {
     }
     return (
         <div className="review-item">
+            <div className="review-title-con">
+                <div className="review-title">
+                    <h2>Review</h2>
+                </div>
+                <div className="rate-title">
+                <h2>Rate</h2>
+
+                </div>
+            </div>
         {Reviews.map((review, index) => (
             <div className="single-review" key={index}>
                 <div className="image-con-review">
 
             {review.revImage  && review.revImage !== "string" ? (
                 <img src={review.revImage} alt={`Review by ${review.user}`} style={{ width: '100px', height: 'auto' }} />
-            ):( <div style={{ display: "block" }}></div>) }
+            ):( <div style={{ display: "none" }}></div>) }
                 </div>
                 <div className="review-con-details">
 

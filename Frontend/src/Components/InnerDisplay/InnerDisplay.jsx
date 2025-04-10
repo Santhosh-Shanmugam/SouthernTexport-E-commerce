@@ -156,6 +156,9 @@ const InnerDisplay = () => {
 
         <div className="inner-con-last">
           <div className="inner-con-last-all-items">
+          <div className="descrip">
+              <p><span>Description:</span>{product.description}</p>
+            </div>
             <p className="last-con-price">₹{product.new_price}</p>
             <div className="stock-left-last">
               <p className="stock-left-last-p">Stock Left: {product.product_count}</p>
@@ -188,9 +191,7 @@ const InnerDisplay = () => {
                 }}
               />
             </div>
-            <div className="descrip">
-              <p><span>Description:</span>{product.description}</p>
-            </div>
+            
 
             <div className="button-buy-cart">
               {product.product_count <= 0 ? (
