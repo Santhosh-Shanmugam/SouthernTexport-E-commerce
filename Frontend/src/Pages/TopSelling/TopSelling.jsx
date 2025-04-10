@@ -6,7 +6,7 @@ const TopSelling = () => {
 const { Data } = useContext(ShopContext);
     
   return (
-   <>
+   < div className='top-iteps-disp'>
    <h1 className="items-head">Top Selling</h1>
         <div className="items-con">
 
@@ -28,7 +28,7 @@ const { Data } = useContext(ShopContext);
                    />
                 ))}
                 </div>
-                </>
+                </div>
   )
 }
 

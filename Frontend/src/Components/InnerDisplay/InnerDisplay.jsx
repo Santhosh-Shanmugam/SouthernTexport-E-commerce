@@ -20,13 +20,13 @@ const InnerDisplay = () => {
   const handleBuy = () => {
     console.log("Buying", selectCount, "items of", product.full_name);
   };
+
+  // ---------------------------------------------------------------------------
   const media = [
     { type: "image", src: product.image1 },
     { type: "image", src: product.image2 },
     { type: "image", src: product.image3 },
   ];
-  
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,6 +44,7 @@ const InnerDisplay = () => {
       prevIndex === 0 ? media.length - 1 : prevIndex - 1
     );
   };
+  // ...................................................................................
   return (
     <div className="inner-con">
       <div className="inner-con-left">
@@ -53,24 +54,24 @@ const InnerDisplay = () => {
           <img src={product.image3} alt="sample3" />
         </div>
         <div className="left-main-image">
-        <div className="imageslider">
-      <div className="carousel">
-        <div className="carousel-container">
-            <img
-              src={media[currentIndex].src}
-              alt={`Slide ${currentIndex + 1}`}
-              className="carousel-image"
-            />
-          
-        </div>
-        <button className="prev" onClick={prevSlide}>
-          &#10094;
-        </button>
-        <button className="next" onClick={nextSlide}>
-          &#10095;
-        </button>
-      </div>
-    </div>
+          <div className="imageslider">
+            <div className="carousel">
+              <div className="carousel-container">
+                <img
+                  src={media[currentIndex].src}
+                  alt={`Slide ${currentIndex + 1}`}
+                  className="carousel-image"
+                />
+
+              </div>
+              <button className="prev" onClick={prevSlide}>
+                &#10094;
+              </button>
+              <button className="next" onClick={nextSlide}>
+                &#10095;
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -135,29 +136,33 @@ const InnerDisplay = () => {
             <h4>Add Location</h4>
           </div>
           <div className="quantity-con-last">
-  <input
-    type="number"
-    placeholder="Qty"
-    min="1"
-    max={product.product_count}
-    value={selectCount === 0 ? '' : selectCount} 
-    onChange={(e) => {
-      let value = e.target.value === '' ? '' : Number(e.target.value);
-      if (value !== '' && value < 1) return; 
-      if (value !== '' && value > product.product_count) return; 
-      
-      setSelectCount(value);
-    }}
-    onBlur={() => {
-      if (selectCount === '' || selectCount < 1) {
-        setSelectCount(1); 
-      }
-    }}
-  />
-</div>
+            <input
+              type="number"
+              placeholder="Qty"
+              min="1"
+              max={product.product_count}
+              value={selectCount === 0 ? '' : selectCount}
+              onChange={(e) => {
+                let value = e.target.value === '' ? '' : Number(e.target.value);
+                if (value !== '' && value < 1) return;
+                if (value !== '' && value > product.product_count) return;
 
+                setSelectCount(value);
+              }}
+              onBlur={() => {
+                if (selectCount === '' || selectCount < 1) {
+                  setSelectCount(1);
+                }
+              }}
+            />
+          </div>
+          <div className="descrip">
+            <p><span>Description:</span>{product.description}</p>
+          </div>
 
           <div className="button-buy-cart">
+
+
             {product.product_count <= 0 ? (
               <div className="buy-btn btn-disabled">
                 <p>BUY</p>

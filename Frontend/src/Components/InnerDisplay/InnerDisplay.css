@@ -13,6 +13,7 @@
     object-fit: cover;
 
 }
+
 .inner-con{
     display: flex;
     align-items: center;
@@ -20,6 +21,8 @@
     justify-content: space-evenly;
     flex-direction: row;
     place-items: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 .inner-con-left{
     display: flex;
@@ -425,4 +428,14 @@ textarea::placeholder {
   
 .prev:hover, .next:hover {
     background: rgba(0, 0, 0, 0.8);
+}
+.descrip{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+}
+.descrip p{
+    font-family:sans-serif;
+    font-size: 16px;
 }
