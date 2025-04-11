@@ -456,3 +456,9 @@ textarea::placeholder {
     justify-content: center;
     width: 100%;
 }
+.inner-review{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}

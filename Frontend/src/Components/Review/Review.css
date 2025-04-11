@@ -35,7 +35,7 @@
     justify-content: center;
     background-color: rgb(255, 255, 89);
     width: 100px;
-    transition: 0.7s;
+    transition: 0.8s;
     cursor: pointer;
 
 }
@@ -45,7 +45,7 @@
     align-items: center;
     justify-content: center;
     width: 100px;
-    transition: 0.7s;
+    transition: 0.8s;
     cursor: pointer;
 
     background-color: rgb(255, 255, 89);

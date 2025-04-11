@@ -90,6 +90,7 @@ const InnerDisplay = () => {
             <div className="imageslider">
               <div className="carousel">
                 <div className="carousel-container">
+
                   <img
                     src={media[currentIndex].src}
                     alt={`Slide ${currentIndex + 1}`}
@@ -218,7 +219,7 @@ const InnerDisplay = () => {
 
       </div>
       <div className="inner-review">
-      {product?.reviews && <Review Reviews={product.reviews} ProductName={product.full_name}/>}
+      {product?.reviews && <Review Reviews={product.reviews} ProductId={product.id}/>}
       </div>
     </div>
   );

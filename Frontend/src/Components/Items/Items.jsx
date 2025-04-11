@@ -79,6 +79,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
                 </div>
                 <div className="item-size">
                     <p>Size: {size_options}</p>
+                
                 </div>
                 <div
                     className="item-status"
