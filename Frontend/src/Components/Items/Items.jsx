@@ -14,9 +14,9 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
             setStatus("Out of stock");
         } else if (product_count <= 10) {
             setStatus("Only few left");
-        } else if (product_count > 40) {
+        } else if (product_count <= 20) {
             setStatus("Hot Deal");
-        } else {
+        } else if(product_count>40){
             setStatus("In Stock");
         }
     }, [product_count]);
