@@ -75,7 +75,87 @@ const productSchema = new mongoose.Schema({
 });
 
 const Product = mongoose.model("Product", productSchema);
-
+//Rating
+app.post("/product/:id/review", upload.single("image"), async (req, res) => {
+    // Convert the product id to a number if your schema stores it as a Number.
+    const productId = Number(req.params.id);
+    const { rating, comment } = req.body;
+    
+    // Parse the rating as a float.
+    const parsedRating = parseFloat(rating);
+    
+    // Validate the rating input to ensure it is between 1 and 5.
+    if (isNaN(parsedRating) || parsedRating < 1 || parsedRating > 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Rating must be a number between 1 and 5",
+      });
+    }
+    
+    // Build the review object.
+    const review = {
+      user: req.body.user || "Anonymous",
+      rating: parsedRating, // Store as a number, not a string
+      comment,
+      revImage: req.file ? `http://localhost:${port}/images/${req.file.filename}` : ""
+    };
+    
+    try {
+      // Find the product by id.
+      const product = await Product.findOne({ id: productId });
+      if (!product) {
+        return res.status(404).json({
+          success: false,
+          message: "Product not found",
+        });
+      }
+      
+      // Add the new review to the reviews array.
+      product.reviews.push(review);
+      
+      // Ensure all ratings are valid numbers between 1-5
+      const validReviews = product.reviews.filter(item => {
+        const reviewRating = parseFloat(item.rating);
+        return !isNaN(reviewRating) && reviewRating >= 1 && reviewRating <= 5;
+      });
+      
+      // Calculate average only if there are valid reviews
+      if (validReviews.length > 0) {
+        // Sum all valid ratings
+        const totalRating = validReviews.reduce((sum, item) => sum + parseFloat(item.rating), 0);
+        
+        // Calculate the average
+        const average = totalRating / validReviews.length;
+        
+        // Clamp between 1-5 and round to one decimal place
+        product.rating = Math.round(Math.min(5, Math.max(1, average)) * 10) / 10;
+        
+        console.log({
+          validReviewsCount: validReviews.length,
+          totalRating,
+          average,
+          finalRating: product.rating
+        });
+      } else {
+        // Default rating if no valid reviews
+        product.rating = 0;
+      }
+      
+      await product.save();
+      res.json({ 
+        success: true, 
+        product, 
+        review 
+      });
+    } catch (err) {
+      console.error("Error adding review:", err);
+      res.status(500).json({
+        success: false,
+        message: "Error adding review",
+      });
+    }
+  });
+  
 // Add Product
 app.post('/addproduct', async (req, res) => {
     console.log("Received product data:", req.body);
