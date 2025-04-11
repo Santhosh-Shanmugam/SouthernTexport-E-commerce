@@ -3,7 +3,9 @@ import { motion } from 'framer-motion';
 import './Home.css';
 import TopSelling from '../TopSelling/TopSelling';
 import { useNavigate } from 'react-router-dom';
-
+import Cotton from '../assets-page/Cotton.webp'
+import Synthetic from '../assets-page/Synthetic.jpg'
+import Silk from '.././assets-page/Silk.jpg'
 
 const testimonials = [
   {
@@ -38,21 +40,21 @@ const categories = [
     id: 'cotton',
     name: 'Cotton',
     description: 'Soft, breathable fabrics for everyday comfort',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',    
+    image:Cotton,   
     count: 24,
   },
   {
     id: 'silk',
     name: 'Silk',
     description: 'Luxurious, smooth fabrics with natural sheen',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    image: Silk,
     count: 18,
   },
   {
     id: 'synthetic',
     name: 'Synthetic',
     description: 'Versatile, durable fabrics for various applications',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80',
+    image: Synthetic,
     count: 20,
   },
 ];
