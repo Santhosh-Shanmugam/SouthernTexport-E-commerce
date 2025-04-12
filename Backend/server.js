@@ -95,13 +95,12 @@ app.post("/product/:id/review", upload.single("image"), async (req, res) => {
     // Build the review object.
     const review = {
       user: req.body.user || "Anonymous",
-      rating: parsedRating, // Store as a number, not a string
+      rating: parsedRating, 
       comment,
       revImage: req.file ? `http://localhost:${port}/images/${req.file.filename}` : ""
     };
     
     try {
-      // Find the product by id.
       const product = await Product.findOne({ id: productId });
       if (!product) {
         return res.status(404).json({
@@ -110,24 +109,18 @@ app.post("/product/:id/review", upload.single("image"), async (req, res) => {
         });
       }
       
-      // Add the new review to the reviews array.
       product.reviews.push(review);
       
-      // Ensure all ratings are valid numbers between 1-5
       const validReviews = product.reviews.filter(item => {
         const reviewRating = parseFloat(item.rating);
         return !isNaN(reviewRating) && reviewRating >= 1 && reviewRating <= 5;
       });
       
-      // Calculate average only if there are valid reviews
       if (validReviews.length > 0) {
-        // Sum all valid ratings
         const totalRating = validReviews.reduce((sum, item) => sum + parseFloat(item.rating), 0);
         
-        // Calculate the average
         const average = totalRating / validReviews.length;
         
-        // Clamp between 1-5 and round to one decimal place
         product.rating = Math.round(Math.min(5, Math.max(1, average)) * 10) / 10;
         
         console.log({
@@ -137,7 +130,6 @@ app.post("/product/:id/review", upload.single("image"), async (req, res) => {
           finalRating: product.rating
         });
       } else {
-        // Default rating if no valid reviews
         product.rating = 0;
       }
       
