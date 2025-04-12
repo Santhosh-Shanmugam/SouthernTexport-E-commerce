@@ -6,7 +6,7 @@ const ShopContextProvider = (props) => {
   const [all_product, setAllProduct] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/allproducts")
+    fetch("https://southerntexport-e-commerce.onrender.com/allproducts")
       .then((response) => response.json())
       .then((data) => {
         setAllProduct(data);

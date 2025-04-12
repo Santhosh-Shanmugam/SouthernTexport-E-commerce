@@ -11,7 +11,7 @@ const Review = ({ Reviews, ProductId }) => {
   // Function to submit the review form data to the backend
   const handleReviewSubmit = async (formData) => {
     try {
-      const response = await fetch(`http://localhost:4000/product/${ProductId}/review`, {
+      const response = await fetch(`https://southerntexport-e-commerce.onrender.com/product/${ProductId}/review`, {
         method: "POST",
         body: formData,
       });

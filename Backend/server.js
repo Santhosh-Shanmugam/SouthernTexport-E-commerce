@@ -37,7 +37,7 @@ app.post("/upload", upload.single("image"), (req, res) => {
     }
     res.json({
         success: 1,
-        image_url: `http://localhost:4000/images/${req.file.filename}`
+        image_url: `https://southerntexport-e-commerce.onrender.com/images/${req.file.filename}`
     });
 });
 
@@ -77,14 +77,12 @@ const productSchema = new mongoose.Schema({
 const Product = mongoose.model("Product", productSchema);
 //Rating
 app.post("/product/:id/review", upload.single("image"), async (req, res) => {
-    // Convert the product id to a number if your schema stores it as a Number.
-    const productId = Number(req.params.id);
+
+  const productId = Number(req.params.id);
     const { rating, comment } = req.body;
     
-    // Parse the rating as a float.
     const parsedRating = parseFloat(rating);
     
-    // Validate the rating input to ensure it is between 1 and 5.
     if (isNaN(parsedRating) || parsedRating < 1 || parsedRating > 5) {
       return res.status(400).json({
         success: false,
@@ -92,12 +90,11 @@ app.post("/product/:id/review", upload.single("image"), async (req, res) => {
       });
     }
     
-    // Build the review object.
     const review = {
       user: req.body.user || "Anonymous",
       rating: parsedRating, 
       comment,
-      revImage: req.file ? `http://localhost:${port}/images/${req.file.filename}` : ""
+      revImage: req.file ? `https://southerntexport-e-commerce.onrender.com/images/${req.file.filename}` : ""
     };
     
     try {
