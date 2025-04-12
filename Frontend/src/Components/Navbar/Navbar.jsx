@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
-
+import stpLogo from '../../assets/stpLogo.png'
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -15,8 +15,8 @@ const Navbar = () => {
       <div className="container">
         {/* Logo Section */}
         <div className="logo-container">
-          <img src="your-logo-url.png" alt="Logo" className="logo" />
-          <span className="company-name">ABC</span>
+          <img src={stpLogo} alt="Logo" className="logo" />
+          <span className="company-name">Southern Texport</span>
         </div>
 
         {/* Desktop Nav List (always visible) */}

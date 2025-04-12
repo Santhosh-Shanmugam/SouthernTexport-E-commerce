@@ -138,3 +138,14 @@
         display: none;
     }
 }
+.logo{
+    width: 60px;
+    background-color: white;
+    border-radius: 50%;
+    height: 60px;
+}
+.logo img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
