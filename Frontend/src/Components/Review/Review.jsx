@@ -54,7 +54,10 @@ const Review = ({ Reviews, ProductId }) => {
           <div className="review-con-details">
             <p><strong>User:</strong> {review.user}</p>
             <p><strong>Rating:</strong> {review.rating} ⭐</p>
+            <div className="comments-sec">
+
             <p><strong>Comment:</strong> {review.comment}</p>
+            </div>
             <p><strong>Date:</strong> {new Date(review.date).toLocaleDateString()}</p>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import './Items.css';
 import { Link } from "react-router-dom";
+import Discount from "../Discount/Discount";
 
 const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, product_count, size_options }) => {
     const [status, setStatus] = useState("");
@@ -9,6 +10,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
 
     const images = useMemo(() => [image1, image2, image3], [image1, image2, image3]);
 
+
     useEffect(() => {
         if (product_count <= 0) {
             setStatus("Out of stock");
@@ -16,7 +18,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
             setStatus("Only few left");
         } else if (product_count <= 20) {
             setStatus("Hot Deal");
-        } else if(product_count>40){
+        } else if (product_count > 40) {
             setStatus("In Stock");
         }
     }, [product_count]);
@@ -39,7 +41,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
         }
 
         return () => clearInterval(interval);
-    }, [hovering, images.length]); 
+    }, [hovering, images.length]);
 
     return (
         <div className="item-con-all">
@@ -59,7 +61,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
                             objectFit: 'cover',
                             transition: 'opacity 0.5s ease-in-out',
                             borderRadius: '12px',
-                            transition:'0.3s',
+                            transition: '0.3s',
                         }}
                     />
                 </div>
@@ -68,7 +70,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
                 </div>
                 <div className="item-price">
                     <div className="item-price-new">
-                        <p>₹{new_price}</p>
+                        <Discount offer={offer} old_price={old_price} />
                     </div>
                     <div className="item-price-old">
                         <p>₹{old_price}</p>
@@ -79,7 +81,7 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
                 </div>
                 <div className="item-size">
                     <p>Size: {size_options}</p>
-                
+
                 </div>
                 <div
                     className="item-status"

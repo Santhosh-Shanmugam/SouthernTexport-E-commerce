@@ -10,6 +10,7 @@ import { Ri24HoursFill, RiSecurePaymentLine } from "react-icons/ri";
 import { IoIosTrophy } from "react-icons/io";
 import { FaMapLocationDot } from "react-icons/fa6";
 import Review from '../Review/Review';
+import Discount from '../Discount/Discount';
 
 const InnerDisplay = () => {
   // Always declare all hooks at the top level, before any conditional logic
@@ -118,7 +119,7 @@ const InnerDisplay = () => {
             <div className="inner-price">
               <p className="price-name">Special Price:</p>
               <div className="new_p">
-                <p>₹{product.new_price}</p>
+              <Discount offer={product.offer} old_price={product.old_price} />
               </div>
               <div className="inner-old-p">
                 <p>₹{product.old_price}</p>
