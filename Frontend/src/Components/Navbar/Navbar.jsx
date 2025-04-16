@@ -25,9 +25,9 @@ const Navbar = () => {
           <Link to="/men"><li className="nav-item">Men</li></Link>
           <Link to="/women"><li className="nav-item">Women</li></Link>
           <Link to="/kids"><li className="nav-item">Kids</li></Link>
-          <Link to="/login">
+          {/* <Link to="/login">
             <div className="login-button">Login</div>
-          </Link>
+          </Link> */}
         </ul>
 
         {/* Mobile Menu Icon */}
@@ -43,9 +43,9 @@ const Navbar = () => {
               <Link to="/men" onClick={toggleMenu}><li className="nav-item">Men</li></Link>
               <Link to="/women" onClick={toggleMenu}><li className="nav-item">Women</li></Link>
               <Link to="/kids" onClick={toggleMenu}><li className="nav-item">Kids</li></Link>
-              <Link to="/login" onClick={toggleMenu}>
+              {/* <Link to="/login" onClick={toggleMenu}>
                 <div className="login-button">Login</div>
-              </Link>
+              </Link> */}
             </ul>
           </div>
         )}

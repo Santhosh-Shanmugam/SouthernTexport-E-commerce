@@ -1,15 +1,21 @@
 require("dotenv").config(); // Load .env variables
 const port = process.env.PORT || 4000;
 const express = require("express");
+const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const AuthRouter = require('./Routes/AuthRouter');
+const ProductRouter = require('./Routes/ProductRouter');
 
 app.use(express.json());
 app.use(cors());
 app.use("/images", express.static("upload/images"));
+app.use(bodyParser.json());
+app.use('/auth', AuthRouter);
+app.use('/products', ProductRouter);
 
 // Connect to MongoDB using .env
 mongoose.connect(process.env.MONGO_URL);
