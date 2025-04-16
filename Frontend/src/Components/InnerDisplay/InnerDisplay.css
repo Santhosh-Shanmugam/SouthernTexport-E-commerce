@@ -290,10 +290,10 @@ textarea::placeholder {
 
 }
 .btn-disabled{
-    background-color: rgb(202, 209, 123);
+    background-color: rgb(206, 208, 186);
 }
 .btn-disabled:hover{
-    background-color: rgb(202, 209, 123) !important;
+    background-color: rgb(206, 208, 186) !important;
     transform: scale(1) !important;
 }
 .add-cart{
