@@ -3,6 +3,8 @@ import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import stpLogo from '../../assets/stpLogo.png'
+import { IoCart } from "react-icons/io5";
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -25,9 +27,6 @@ const Navbar = () => {
           <Link to="/men"><li className="nav-item">Men</li></Link>
           <Link to="/women"><li className="nav-item">Women</li></Link>
           <Link to="/kids"><li className="nav-item">Kids</li></Link>
-          {/* <Link to="/login">
-            <div className="login-button">Login</div>
-          </Link> */}
         </ul>
 
         {/* Mobile Menu Icon */}
@@ -43,9 +42,6 @@ const Navbar = () => {
               <Link to="/men" onClick={toggleMenu}><li className="nav-item">Men</li></Link>
               <Link to="/women" onClick={toggleMenu}><li className="nav-item">Women</li></Link>
               <Link to="/kids" onClick={toggleMenu}><li className="nav-item">Kids</li></Link>
-              {/* <Link to="/login" onClick={toggleMenu}>
-                <div className="login-button">Login</div>
-              </Link> */}
             </ul>
           </div>
         )}

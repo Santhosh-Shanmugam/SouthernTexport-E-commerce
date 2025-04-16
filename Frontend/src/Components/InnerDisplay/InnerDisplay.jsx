@@ -18,6 +18,7 @@ const InnerDisplay = () => {
   const { all_product } = useContext(ShopContext);
   const { productID } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const {addToCart} =useContext(ShopContext);
 
   // Find the product
   const product = all_product.find((e) => e.id === Number(productID));
@@ -210,7 +211,10 @@ const InnerDisplay = () => {
                   <p>Add To Cart</p>
                 </div>
               ) : (
-                <div className="add-cart">
+                <div className="add-cart" onClick={() => {
+                  console.log("Adding to cart:", product.id);
+                  addToCart(product.id);
+                }}>
                   <p>Add To Cart</p>
                 </div>
               )}
