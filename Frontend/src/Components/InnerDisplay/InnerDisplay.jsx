@@ -205,7 +205,7 @@ const InnerDisplay = () => {
             {showAlert && (
               <div className="alert-overlay">
                 <div className="alert-box">
-                  <p>Product sucussfully added to the cart</p>
+                  <p>Product successfully added to the cart</p>
                   <button className="close-btn" onClick={handleClose}>
                     Close
                   </button>
