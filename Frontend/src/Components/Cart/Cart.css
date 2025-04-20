@@ -238,7 +238,6 @@ body {
   width: 35px;
 }
 
-/* Media Queries for Responsiveness */
 @media screen and (max-width: 1024px) {
   .cartitems-main {
     grid-template-columns: 0.5fr 1.5fr 1fr 0.8fr 0.8fr 1fr 0.5fr;

@@ -27,6 +27,7 @@ const Navbar = () => {
           <Link to="/men"><li className="nav-item">Men</li></Link>
           <Link to="/women"><li className="nav-item">Women</li></Link>
           <Link to="/kids"><li className="nav-item">Kids</li></Link>
+          <Link to="/cart"><li className="nav-item">Cart</li></Link>
         </ul>
 
         {/* Mobile Menu Icon */}

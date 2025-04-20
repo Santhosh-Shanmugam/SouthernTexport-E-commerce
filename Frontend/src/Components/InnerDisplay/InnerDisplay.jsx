@@ -18,7 +18,8 @@ const InnerDisplay = () => {
   const { all_product } = useContext(ShopContext);
   const { productID } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const {addToCart} =useContext(ShopContext);
+  const { addToCart } = useContext(ShopContext);
+  const [showAlert, setShowAlert] = useState(false);
 
   // Find the product
   const product = all_product.find((e) => e.id === Number(productID));
@@ -76,6 +77,13 @@ const InnerDisplay = () => {
   if (!product) {
     return <div>Loading product...</div>;
   }
+  const handleClick = () => {
+    setShowAlert(true);
+  };
+  const handleClose = () => {
+    setShowAlert(false);
+  };
+
 
   // Render the complete component
   return (
@@ -120,7 +128,7 @@ const InnerDisplay = () => {
             <div className="inner-price">
               <p className="price-name">Special Price:</p>
               <div className="new_p">
-              <Discount offer={product.offer} old_price={product.old_price} />
+                <Discount offer={product.offer} old_price={product.old_price} />
               </div>
               <div className="inner-old-p">
                 <p>₹{product.old_price}</p>
@@ -159,7 +167,7 @@ const InnerDisplay = () => {
 
         <div className="inner-con-last">
           <div className="inner-con-last-all-items">
-          <div className="descrip">
+            <div className="descrip">
               <p><span>Description:</span>{product.description}</p>
             </div>
             <p className="last-con-price">₹{product.new_price}</p>
@@ -194,7 +202,16 @@ const InnerDisplay = () => {
                 }}
               />
             </div>
-            
+            {showAlert && (
+              <div className="alert-overlay">
+                <div className="alert-box">
+                  <p>Product sucussfully added to the cart</p>
+                  <button className="close-btn" onClick={handleClose}>
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
 
             <div className="button-buy-cart">
               {product.product_count <= 0 ? (
@@ -212,9 +229,10 @@ const InnerDisplay = () => {
                 </div>
               ) : (
                 <div className="add-cart" onClick={() => {
-                  console.log("Adding to cart:", product.id);
                   addToCart(product.id);
-                }}>
+                  handleClick()
+                }
+                }>
                   <p>Add To Cart</p>
                 </div>
               )}
@@ -224,7 +242,7 @@ const InnerDisplay = () => {
 
       </div>
       <div className="inner-review">
-      {product?.reviews && <Review Reviews={product.reviews} ProductId={product.id}/>}
+        {product?.reviews && <Review Reviews={product.reviews} ProductId={product.id} />}
       </div>
     </div>
   );
