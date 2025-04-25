@@ -1,22 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Cart.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ShopContext } from "../../Context/ShopContext";
 import { MdCancel } from "react-icons/md";
 
 const Cart = () => {
-    const { all_product, cartItem, addToCart, removeFromCart } = useContext(ShopContext);
+    const { all_product, cartItem, removeFromCart } = useContext(ShopContext);
 
     // Calculate total amount
     const getTotalCartAmount = () => {
-        return all_product.reduce((total, e) => total + (e.new_price * (cartItem[e.id] || 0)), 0);
+        let total = 0;
+        all_product.forEach((product) => {
+            if (cartItem[product.id] && cartItem[product.id].length > 0) {
+                cartItem[product.id].forEach(item => {
+                    total += product.new_price * item.quantity;
+                });
+            }
+        });
+        return total;
     };
 
     const totalPrice = getTotalCartAmount();
-    history.pushState({ totalPrice }, "", window.location.href);
-
-    // Check if cart is empty
-    const isCartEmpty = !all_product.some(e => cartItem[e.id] > 0);
+    
+    // Check if cart is empty - now checks if any product has items
+    const isCartEmpty = Object.values(cartItem).every(items => items.length === 0);
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="cartitems">
@@ -31,38 +42,37 @@ const Cart = () => {
                     <p>Product</p>
                     <p>Title</p>
                     <p>Price</p>
-                    <p>Rating</p>
+                    <p>Size</p>
                     <p>Quantity</p>
                     <p>Total</p>
                     <p>Remove</p>
                 </div>
-                <hr />
 
                 {isCartEmpty ? (
                     <div className="empty-cart-message">
                         <p>Your cart is empty. Add some products!</p>
                     </div>
                 ) : (
-                    all_product.map((e) => {
-                        if (cartItem[e.id] > 0) {
-                            return (
-                                <div key={e.id}>
+                    all_product.map((product) => {
+                        if (cartItem[product.id] && cartItem[product.id].length > 0) {
+                            return cartItem[product.id].map((item, index) => (
+                                <div key={`${product.id}-${item.size}-${index}`}>
                                     <div className="cartitems-format cartitems-main">
-                                        <img src={e.image1} alt={e.name} className="cartitem-icon" />
-                                        <p className="cart-name">{e.name}</p>
-                                        <p>₹{e.new_price}</p>
-                                        <p>{e.rating}</p>
+                                        <img src={product.image1} alt={product.name} className="cartitem-icon" />
+                                        <p className="cart-name">{product.name}</p>
+                                        <p>₹{product.new_price}</p>
+                                        <p>{item.size || 'N/A'}</p>
                                         <div className="quantity-controls">
-                                            <span className="quantity-value">{cartItem[e.id]}</span>
+                                            <span className="quantity-value">{item.quantity}</span>
                                         </div>
-                                        <p>₹{e.new_price * cartItem[e.id]}</p>
-                                        <div onClick={() => removeFromCart(e.id)} alt="Delete Item">
-                                            <MdCancel  className="remove1"/>
+                                        <p>₹{product.new_price * item.quantity}</p>
+                                        <div onClick={() => removeFromCart(product.id, item.size)} alt="Delete Item">
+                                            <MdCancel className="remove1" />
                                         </div>
                                     </div>
                                     <hr />
                                 </div>
-                            );
+                            ));
                         }
                         return null;
                     })

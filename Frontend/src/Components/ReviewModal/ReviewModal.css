@@ -94,7 +94,9 @@
   .modal-actions button[type="button"]:hover {
     background-color: #c82333;
   }
-  
+  input{
+    width: 100%;
+  }
   /* Animation */
   @keyframes slideFadeIn {
     from {
