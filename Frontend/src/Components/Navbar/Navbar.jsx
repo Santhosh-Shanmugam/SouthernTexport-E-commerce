@@ -43,6 +43,8 @@ const Navbar = () => {
               <Link to="/men" onClick={toggleMenu}><li className="nav-item">Men</li></Link>
               <Link to="/women" onClick={toggleMenu}><li className="nav-item">Women</li></Link>
               <Link to="/kids" onClick={toggleMenu}><li className="nav-item">Kids</li></Link>
+              <Link to="/cart"><li className="nav-item">Cart</li></Link>
+
             </ul>
           </div>
         )}

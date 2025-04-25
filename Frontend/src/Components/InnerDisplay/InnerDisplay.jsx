@@ -18,9 +18,10 @@ const InnerDisplay = () => {
   const { all_product } = useContext(ShopContext);
   const { productID } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [productSize, setProductSize] = useState('');
   const { addToCart } = useContext(ShopContext);
   const [showAlert, setShowAlert] = useState(false);
-
+  console.log(productSize);
   // Find the product
   const product = all_product.find((e) => e.id === Number(productID));
 
@@ -44,6 +45,8 @@ const InnerDisplay = () => {
       return () => clearInterval(interval);
     }
   }, [currentIndex, media.length]); // Add media.length as dependency
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -143,11 +146,19 @@ const InnerDisplay = () => {
               <p><MdLocalOffer className="inner-offer-icon" /> {product.offer}</p>
             </div>
             <h2>Size</h2>
-            <div className="size-cont">
+            <div className="size-cont" >
               {product.size_options.map((size, index) => (
-                <div className="size-css" key={index}>{size}</div>
+                <div
+                  className={`size-css ${productSize === size ? "selected" : ""}`}
+                  key={index}
+                  onClick={() => setProductSize(size)}
+                >
+                  {size}
+                </div>
               ))}
+
             </div>
+
             <div className="inner-colors">
               <div className="inner-color">
                 <div style={{ display: 'flex', color: 'black', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
@@ -232,7 +243,7 @@ const InnerDisplay = () => {
                 </div>
               ) : (
                 <div className="add-cart" onClick={() => {
-                  addToCart(product.id);
+                  addToCart(product.id, productSize, selectCount);
                   handleClick()
                 }
                 }>
