@@ -295,6 +295,7 @@ textarea::placeholder {
 .btn-disabled:hover{
     background-color: rgb(206, 208, 186) !important;
     transform: scale(1) !important;
+    cursor: not-allowed;
 }
 .add-cart{
     display: flex;

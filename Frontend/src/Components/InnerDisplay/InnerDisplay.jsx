@@ -44,6 +44,9 @@ const InnerDisplay = () => {
       return () => clearInterval(interval);
     }
   }, [currentIndex, media.length]); // Add media.length as dependency
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Helper functions
   const nextSlide = () => {
