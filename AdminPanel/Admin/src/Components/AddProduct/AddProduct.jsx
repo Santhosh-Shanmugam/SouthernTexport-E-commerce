@@ -53,7 +53,7 @@ const AddProduct = () => {
 
     try {
       // Upload the image
-      const uploadResponse = await fetch('https://nextscape-backend.onrender.com/upload', {
+      const uploadResponse = await fetch('https://southerntexport-e-commerce.onrender.com/upload', {
         method: 'POST',
         body: formData,
       });
@@ -63,7 +63,7 @@ const AddProduct = () => {
         // Add the product
         const product = { ...productDetails, image: responseData.image_url };
 
-        const productResponse = await fetch('https://nextscape-backend.onrender.com/addproduct', {
+        const productResponse = await fetch('https://southerntexport-e-commerce.onrender.com/addproduct', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
