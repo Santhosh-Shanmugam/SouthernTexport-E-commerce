@@ -4,13 +4,24 @@ import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import stpLogo from '../../assets/stpLogo.png'
 import { IoCart } from "react-icons/io5";
+import { handleError, handleSuccess } from '../../Pages/LoginSignup/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const handleLogout = (e) => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('loggedInUser');
+    handleSuccess('User Loggedout');
+    setTimeout(() => {
+        navigate('/login');
+    }, 1000)
+}
 
   return (
     <nav className="navbar">
@@ -28,6 +39,7 @@ const Navbar = () => {
           <Link to="/women"><li className="nav-item">Women</li></Link>
           <Link to="/kids"><li className="nav-item">Kids</li></Link>
           <Link to="/cart"><li className="nav-item">Cart</li></Link>
+          <button className='logout-button' onClick={handleLogout}>Logout</button>
         </ul>
 
         {/* Mobile Menu Icon */}
@@ -44,7 +56,7 @@ const Navbar = () => {
               <Link to="/women" onClick={toggleMenu}><li className="nav-item">Women</li></Link>
               <Link to="/kids" onClick={toggleMenu}><li className="nav-item">Kids</li></Link>
               <Link to="/cart"><li className="nav-item">Cart</li></Link>
-
+              <button className='logout-button' onClick={handleLogout}>Logout</button>
             </ul>
           </div>
         )}

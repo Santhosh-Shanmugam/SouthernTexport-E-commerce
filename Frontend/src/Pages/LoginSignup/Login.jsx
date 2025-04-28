@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import { handleError, handleSuccess } from './utils';
 import './Login.css'
-
+import { jwtDecode } from 'jwt-decode';
 function Login() {
 
     const [loginInfo, setLoginInfo] = useState({
@@ -36,9 +36,12 @@ function Login() {
                 body: JSON.stringify(loginInfo)
             });
             const result = await response.json();
-            const { success, message, jwtToken, name, error } = result;
+            const { success, message, jwtToken, name, _id, error } = result;
             if (success) {
                 handleSuccess(message);
+                const decodedToken = jwtDecode(jwtToken);
+                const userId = decodedToken._id; 
+                localStorage.setItem('userId', userId);
                 localStorage.setItem('token', jwtToken);
                 localStorage.setItem('loggedInUser', name);
                 setTimeout(() => {
