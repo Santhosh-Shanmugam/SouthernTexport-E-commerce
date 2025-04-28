@@ -61,7 +61,7 @@ const Cart = () => {
                                         <img src={product.image1} alt={product.name} className="cartitem-icon" />
                                         <p className="cart-name">{product.name}</p>
                                         <p>₹{product.new_price}</p>
-                                        <p>{item.size || 'N/A'}</p>
+                                        <p>{item.size || 'XL'}</p>
                                         <div className="quantity-controls">
                                             <span className="quantity-value">{item.quantity}</span>
                                         </div>

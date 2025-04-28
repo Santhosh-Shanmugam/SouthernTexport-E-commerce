@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './InnerDisplay.css';
 import { ShopContext } from '../../Context/ShopContext';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { MdLocalOffer } from "react-icons/md";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FaShoppingCart } from "react-icons/fa";
@@ -36,7 +36,6 @@ const InnerDisplay = () => {
 
   // Now we can safely use useEffect - it will always be called
   useEffect(() => {
-    // Only set up interval if we have media items
     if (media.length > 0) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % media.length);
@@ -44,7 +43,7 @@ const InnerDisplay = () => {
 
       return () => clearInterval(interval);
     }
-  }, [currentIndex, media.length]); // Add media.length as dependency
+  }, [currentIndex, media.length]); 
 
 
   useEffect(() => {
@@ -66,20 +65,9 @@ const InnerDisplay = () => {
     }
   };
 
-  const handleBuy = () => {
-    if (product) {
-      console.log("Buying", selectCount, "items of", product.full_name);
-    }
-  };
 
-  // Logging for debugging
-  if (product) {
-    console.log("media array:", media);
-    console.log("currentIndex:", currentIndex);
-    console.log("current media item:", media[currentIndex]);
-  }
 
-  // Handle case where product is not found
+
   if (!product) {
     return <div>Loading product...</div>;
   }
@@ -89,7 +77,14 @@ const InnerDisplay = () => {
   const handleClose = () => {
     setShowAlert(false);
   };
+  const handleAddToCart = () => {
+    if (productSize=="") {
+      alert("Please select a size before buy!");
 
+      return;
+    }
+  };
+  
 
   // Render the complete component
   return (
@@ -147,12 +142,17 @@ const InnerDisplay = () => {
             </div>
             <h2>Size</h2>
             <div className="size-cont" >
+
               {product.size_options.map((size, index) => (
                 <div
-                  className={`size-css ${productSize === size ? "selected" : ""}`}
-                  key={index}
-                  onClick={() => setProductSize(size)}
-                >
+                className={`size-css ${productSize === size ? "selected" : "" }` }
+                key={index}
+                onClick={() => {
+                  setProductSize(size);
+                }
+              }
+            
+              >
                   {size}
                 </div>
               ))}
@@ -219,7 +219,7 @@ const InnerDisplay = () => {
             {showAlert && (
               <div className="alert-overlay">
                 <div className="alert-box">
-                  <p>Product successfully added to the cart</p>
+                  <p>Product successfully added</p>
                   <button className="close-btn" onClick={handleClose}>
                     Close
                   </button>
@@ -233,10 +233,18 @@ const InnerDisplay = () => {
                   <p>BUY</p>
                 </div>
               ) : (
-                <div className="buy-btn" onClick={handleBuy}>
-                  <p>BUY</p>
+              <Link to="/cart" ><div className="buy-btn" onClick={() => {
+                  addToCart(product.id, productSize, selectCount);
+                  handleClick()
+                  handleAddToCart()
+
+                }
+                }>
+                  <p>Buy</p>
                 </div>
+                </Link>
               )}
+              
               {product.product_count <= 0 ? (
                 <div className="buy-btn btn-disabled">
                   <p>Add To Cart</p>
@@ -245,6 +253,8 @@ const InnerDisplay = () => {
                 <div className="add-cart" onClick={() => {
                   addToCart(product.id, productSize, selectCount);
                   handleClick()
+                  handleAddToCart()
+
                 }
                 }>
                   <p>Add To Cart</p>

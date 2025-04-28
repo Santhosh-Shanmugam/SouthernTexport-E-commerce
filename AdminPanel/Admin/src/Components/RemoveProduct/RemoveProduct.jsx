@@ -1,3 +1,4 @@
+// RemoveProduct.jsx
 import './RemoveProduct.css';
 import React, { useEffect, useState } from 'react';
 import delete1 from '../AssertsAdmin/delete1.png';
@@ -49,48 +50,55 @@ const RemoveProduct = () => {
   return (
     <div className="listproduct">
       <h1>All Product List</h1>
-      {error && <p className="error-message">{error}</p>} 
-      <div className="list-all-product">
-        <div className="listproduct-headers listproduct-format-main">
-          <p>Product</p>
-          <p>Title</p>
-          <p>Price</p>
-          <p>Rating</p>
-          <p>Quantity</p>
-          <p>Total</p>
-          <p>Remove</p>
-        </div>
-        <hr />
-        {allProducts.length > 0 ? (
-          allProducts.map((product, index) => {
-            // Assume default values for quantities and ratings if not present in schema
-            const quantity = product.quantity || 1;
-            const rating = product.rating || "N/A";
-            const total = parseFloat(product.price) * quantity;
-            
-            return (
-              <React.Fragment key={index}>
-                <div className="listproduct-format-main listproduct-format">
-                  <img src={product.image} alt="" className="listproduct-icon" />
-                  <p>{product.DealerName}</p>
-                  <p>₹{product.price}</p>
-                  <p>{rating}</p>
-                  <p>{quantity}</p>
-                  <p>₹{total.toFixed(2)}</p>
-                  <img
-                    onClick={() => removeProduct(product.id)}
-                    src={delete1}
-                    alt="Remove"
-                    className="listproduct-remove"
-                  />
-                </div>
-                <hr />
-              </React.Fragment>
-            );
-          })
-        ) : (
-          <p>No products available</p>
-        )}
+      {error && <p className="error-message">{error}</p>}
+      <div className="table-container">
+        <table className="product-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Old Price</th>
+              <th>Category</th>
+              <th>Offer</th>
+              <th>Fabric</th>
+              <th>Rating</th>
+              <th>Stock</th>
+              <th>Status</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allProducts.length > 0 ? (
+              allProducts.map((product, index) => (
+                <tr key={index}>
+                  <td>
+                    <img src={product.image1} alt="Product" className="product-image" />
+                  </td>
+                  <td>{product.name}</td>
+                  <td>₹{product.old_price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.offer}</td>
+                  <td>{product.fabric}</td>
+                  <td>{product.rating ?? "N/A"}</td>
+                  <td>{product.product_count ?? 0}</td>
+                  <td>{product.product_status ?? "N/A"}</td>
+                  <td>
+                    <img
+                      onClick={() => removeProduct(product.id)}
+                      src={delete1}
+                      alt="Remove"
+                      className="delete-icon"
+                    />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="10">No products available</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -95,7 +95,9 @@
     gap: 15px;
 
 }
-
+.button-buy-cart a{
+    text-decoration: none;
+}
 .size-css {
     display: flex;
     border: 2px solid;
