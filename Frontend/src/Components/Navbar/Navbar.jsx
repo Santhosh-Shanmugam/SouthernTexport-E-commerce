@@ -17,6 +17,7 @@ const Navbar = () => {
   const handleLogout = (e) => {
     localStorage.removeItem('token');
     localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('userId');
     handleSuccess('User Loggedout');
     setTimeout(() => {
         navigate('/login');
