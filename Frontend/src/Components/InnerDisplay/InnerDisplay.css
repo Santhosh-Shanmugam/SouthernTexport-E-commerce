@@ -95,9 +95,11 @@
     gap: 15px;
 
 }
-.button-buy-cart a{
+
+.button-buy-cart a {
     text-decoration: none;
 }
+
 .size-css {
     display: flex;
     border: 2px solid;
@@ -108,7 +110,7 @@
     border: 3px solid rgb(177, 163, 163);
     width: 50px;
     height: 50px;
-    
+
     padding: 5px;
     transition: 0.5s;
 
