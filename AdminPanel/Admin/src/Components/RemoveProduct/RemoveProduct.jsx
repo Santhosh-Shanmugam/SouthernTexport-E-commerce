@@ -1,15 +1,17 @@
 // RemoveProduct.jsx
-import './RemoveProduct.css';
-import React, { useEffect, useState } from 'react';
-import delete1 from '../AssertsAdmin/delete1.png';
+import "./RemoveProduct.css";
+import React, { useEffect, useState } from "react";
+import delete1 from "../AssertsAdmin/delete1.png";
 
 const RemoveProduct = () => {
   const [allProducts, setAllProducts] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const fetchInfo = async () => {
     try {
-      const response = await fetch('https://southerntexport-e-commerce.onrender.com/allproducts');
+      const response = await fetch(
+        "https://southerntexport-e-commerce.onrender.com/allproducts"
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -17,26 +19,29 @@ const RemoveProduct = () => {
       setAllProducts(data);
     } catch (err) {
       console.error("Failed to fetch products:", err);
-      setError('Failed to fetch products');
+      setError("Failed to fetch products");
     }
   };
 
   const removeProduct = async (id) => {
     try {
-      const response = await fetch('https://southerntexport-e-commerce.onrender.com/removeproduct', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
-      });
+      const response = await fetch(
+        "https://southerntexport-e-commerce.onrender.com/removeproduct",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Failed to remove product with id ${id}`);
       }
 
-      await fetchInfo(); 
+      await fetchInfo();
     } catch (err) {
       console.error(`Error removing product with id ${id}:`, err);
       setError(`Error removing product with id ${id}`);
@@ -46,7 +51,19 @@ const RemoveProduct = () => {
   useEffect(() => {
     fetchInfo();
   }, []);
+ 
 
+  const getStatusClass = (status) => {
+    status = status.toLowerCase();
+    if (status.includes('in stock')) return 'status-in-stock';
+    if (status.includes('top') || status.includes('selling')) return 'status-top-selling';
+    if (status.includes('low')) return 'status-low-stock';
+    if (status.includes('out') || status.includes('unavailable')) return 'status-out-of-stock';
+    if (status.includes('new')) return 'status-new';
+    return '';
+  };
+
+  
   return (
     <div className="listproduct">
       <h1>All Product List</h1>
@@ -72,7 +89,11 @@ const RemoveProduct = () => {
               allProducts.map((product, index) => (
                 <tr key={index}>
                   <td>
-                    <img src={product.image1} alt="Product" className="product-image" />
+                    <img
+                      src={product.image1}
+                      alt="Product"
+                      className="product-image"
+                    />
                   </td>
                   <td>{product.name}</td>
                   <td>₹{product.old_price}</td>
@@ -81,7 +102,19 @@ const RemoveProduct = () => {
                   <td>{product.fabric}</td>
                   <td>{product.rating ?? "N/A"}</td>
                   <td>{product.product_count ?? 0}</td>
-                  <td>{product.product_status ?? "N/A"}</td>
+                  <td>
+                    {product.product_status ? (
+                      <span
+                        className={`status-badge ${getStatusClass(
+                          product.product_status
+                        )}`}
+                      >
+                        {product.product_status}
+                      </span>
+                    ) : (
+                      "N/A"
+                    )}
+                  </td>
                   <td>
                     <img
                       onClick={() => removeProduct(product.id)}
