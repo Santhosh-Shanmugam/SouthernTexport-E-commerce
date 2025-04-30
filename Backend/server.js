@@ -8,12 +8,14 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const AuthRouter = require('./Routes/AuthRouter');
+const deliveryAddressRoutes = require('./Routes/deliveryAddressRoutes');
 const Schema = mongoose.Schema;
 app.use(express.json());
 app.use(cors());
 app.use("/images", express.static("upload/images"));
 app.use(bodyParser.json());
 app.use('/auth', AuthRouter);
+app.use('/api/delivery', deliveryAddressRoutes);
 
 // Connect to MongoDB using .env
 mongoose.connect(process.env.MONGO_URL)

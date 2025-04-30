@@ -267,6 +267,7 @@ hr {
 
 .add-location h4 {
     font-size: 20px;
+    cursor: pointer;
 }
 
 .add-location-icon {

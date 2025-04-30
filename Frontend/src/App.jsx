@@ -16,6 +16,7 @@ import Login from './Pages/LoginSignup/Login';
 import Signup from './Pages/LoginSignup/Signup';
 import AuthLayout from './layouts/AuthLayout';
 import RefrshHandler from './Pages/LoginSignup/RefrshHandler';
+import DeliveryAddress from './Pages/DeliveryAddress/DeliveryAddress';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -48,6 +49,7 @@ const App = () => {
                 <Route path="/topselling" element={<TopSelling />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/product/:productID" element={<InnerDisplay />} />
+                <Route path="/delivery_address" element={<DeliveryAddress />} />
               </Routes>
               <Footer />
             </>

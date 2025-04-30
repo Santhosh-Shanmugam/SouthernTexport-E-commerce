@@ -191,10 +191,12 @@ const InnerDisplay = () => {
             <div className="">
               <span>{product.delivery}</span>
             </div>
-            <div className="add-location">
-              <FaMapLocationDot className="add-location-icon" />
-              <h4>Add Location</h4>
-            </div>
+            <Link to="/delivery_address" className="add-location-link">
+              <div className="add-location">
+                  <FaMapLocationDot className="add-location-icon" />
+                  <h4>Add Location</h4>
+              </div>
+            </Link>
             <div className="quantity-con-last">
               <input
                 type="number"
