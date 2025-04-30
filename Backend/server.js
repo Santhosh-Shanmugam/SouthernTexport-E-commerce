@@ -146,26 +146,7 @@ app.post('/addcart', async (req, res) => {
   }
 });
 
-// ✅ Optional: Simple test route to manually verify cart saving works
-app.get("/testcart", async (req, res) => {
-  try {
-    const testCart = new CartModel({
-      userId: "testUser123",
-      cartItems: [
-        {
-          productId: "prod001",
-          productSize: "L",
-          selectCount: 2
-        }
-      ]
-    });
-    await testCart.save();
-    res.json({ success: true, testCart });
-  } catch (err) {
-    console.error("Test cart error:", err);
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
+
 
 // Rating
 app.post("/product/:id/review", upload.single("image"), async (req, res) => {
