@@ -7,7 +7,8 @@ import { MdCancel } from "react-icons/md";
 const Cart = () => {
     const { all_product, cartItem, removeFromCart } = useContext(ShopContext);
 
-    // Calculate total amount
+    const userId = localStorage.getItem("userId");
+
     const getTotalCartAmount = () => {
         let total = 0;
         all_product.forEach((product) => {
@@ -21,10 +22,53 @@ const Cart = () => {
     };
 
     const totalPrice = getTotalCartAmount();
-    
-    // Check if cart is empty - now checks if any product has items
+
     const isCartEmpty = Object.values(cartItem).every(items => items.length === 0);
-    
+
+    const handleBuyNow = async () => {
+        if (isCartEmpty || !userId) {
+            alert("Cart is empty or user not logged in.");
+            return;
+        }
+
+        // Prepare the cartItems array
+        const cartItemsToSend = [];
+
+        all_product.forEach((product) => {
+            if (cartItem[product.id]) {
+                cartItem[product.id].forEach((item) => {
+                    cartItemsToSend.push({
+                        productId: product.id,
+                        productSize: item.size || 'XL',
+                        selectCount: item.quantity
+                    });
+                });
+            }
+        });
+
+        try {
+            const response = await fetch("https://southerntexport-e-commerce.onrender.com/addcart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ userId, cartItems: cartItemsToSend }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Cart saved successfully!");
+                // Optionally: clear the cart or redirect
+            } else {
+                alert("Failed to save cart: " + data.message);
+            }
+        } catch (error) {
+            console.error("Error saving cart:", error);
+            alert("Something went wrong. Try again.");
+        }
+    };
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -94,7 +138,9 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <button disabled={isCartEmpty}>Buy Now</button>
+                    <button disabled={isCartEmpty} onClick={handleBuyNow}>
+                        Buy Now
+                    </button>
                 </div>
             </div>
         </div>
