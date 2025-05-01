@@ -27,7 +27,7 @@ const DeliveryAddress = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:4000/api/delivery/add', {
+      const response = await axios.post('https://southerntexport-e-commerce.onrender.com/api/delivery/add', {
         ...formData,
         user_id, 
       });
