@@ -112,13 +112,14 @@ const cartSchema = new mongoose.Schema({
 });
 
 const CartModel = mongoose.model('Cart', cartSchema);
+// Improved backend route for /addcart
 
-// ✅ Route to add items to cart with validation and error handling
 app.post('/addcart', async (req, res) => {
   console.log("Received cart data:", req.body);
 
   const { userId, cartItems } = req.body;
 
+  // Input validation
   if (!userId || !Array.isArray(cartItems) || cartItems.length === 0) {
     return res.status(400).json({
       success: false,
@@ -126,27 +127,73 @@ app.post('/addcart', async (req, res) => {
     });
   }
 
+  // Validate each cart item
   for (let item of cartItems) {
-    if (!item.productId || !item.productSize) {
+    if (!item.productId || !item.productSize || !item.selectCount || item.selectCount < 1) {
       return res.status(400).json({
         success: false,
-        message: "Each cart item must have productId and productSize"
+        message: "Each cart item must have valid productId, productSize and selectCount (min 1)"
       });
     }
   }
 
   try {
-    const cart = new CartModel({ userId, cartItems });
+    // Find or create cart for this user
+    let cart = await CartModel.findOne({ userId });
+
+    if (cart) {
+      // If cart exists, completely replace with the new items
+      // This ensures we have exactly what's in the frontend state
+      cart.cartItems = cartItems;
+    } else {
+      // If no cart exists, create a new one
+      cart = new CartModel({ userId, cartItems });
+    }
+
     await cart.save();
-    console.log("Cart saved:", cart);
-    res.json({ success: true, cart });
+    console.log("Cart updated:", cart);
+
+    res.json({
+      success: true,
+      message: "Cart updated successfully",
+      cart
+    });
   } catch (err) {
     console.error("Error saving cart:", err);
-    res.status(500).json({ success: false, message: "Failed to save cart", error: err.message });
+    res.status(500).json({
+      success: false,
+      message: "Failed to save cart",
+      error: err.message
+    });
   }
 });
 
+app.get('/getcart/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const cart = await CartModel.findOne({ userId });
 
+    if (!cart) {
+      return res.json({ success: true, cart: { userId, cartItems: [] } });
+    }
+
+    res.json({ success: true, cart });
+  } catch (err) {
+    console.error("Error fetching cart:", err);
+    res.status(500).json({ success: false, message: "Failed to fetch cart" });
+  }
+});
+app.delete('/clearcart/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    await CartModel.findOneAndDelete({ userId });
+    res.json({ success: true, message: "Cart cleared successfully" });
+  } catch (err) {
+    console.error("Error clearing cart:", err);
+    res.status(500).json({ success: false, message: "Failed to clear cart" });
+  }
+});
+// Optional: Add a route to clear cart
 
 // Rating
 app.post("/product/:id/review", upload.single("image"), async (req, res) => {

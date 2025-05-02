@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './InnerDisplay.css';
 import { ShopContext } from '../../Context/ShopContext';
 import { Link, useParams } from 'react-router-dom';
@@ -15,13 +15,20 @@ import Discount from '../Discount/Discount';
 const InnerDisplay = () => {
   // Always declare all hooks at the top level, before any conditional logic
   const [selectCount, setSelectCount] = useState(1); // Default to 1
-  const { all_product } = useContext(ShopContext);
+  const { all_product, addToCart, cartItem } = useContext(ShopContext);
   const { productID } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [productSize, setProductSize] = useState('');
-  const { addToCart } = useContext(ShopContext);
   const [showAlert, setShowAlert] = useState(false);
-  console.log(productSize);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Add refs for cart syncing
+  const cartHashRef = useRef('');
+  const hasSyncedCart = useRef(false);
+
+  const userId = localStorage.getItem("userId");
+
   // Find the product
   const product = all_product.find((e) => e.id === Number(productID));
 
@@ -43,14 +50,17 @@ const InnerDisplay = () => {
 
       return () => clearInterval(interval);
     }
-  }, [currentIndex, media.length]); 
-
+  }, [currentIndex, media.length]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Helper functions
+  // Cart syncing useEffect - moved outside of handlers
+  // Replace your current cart sync useEffect with this improved version
+  // Updated cart syncing function - replace your current cart sync useEffect with this version
+
+
   const nextSlide = () => {
     if (media.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % media.length);
@@ -65,31 +75,36 @@ const InnerDisplay = () => {
     }
   };
 
+  const handleClick = () => {
+    setShowAlert(true);
+  };
 
+  const handleClose = () => {
+    setShowAlert(false);
+  };
 
+  const handleAddToCart = () => {
+    if (productSize === "") {
+      alert("Please select a size before adding to cart!");
+      return false;
+    }
+    
+    // Add the product to cart with the selected size and quantity
+    addToCart(product.id, productSize, selectCount);
+    
+    // Show the success alert
+    setShowAlert(true);
+    
+    return true;
+  };
 
   if (!product) {
     return <div>Loading product...</div>;
   }
-  const handleClick = () => {
-    setShowAlert(true);
-  };
-  const handleClose = () => {
-    setShowAlert(false);
-  };
-  const handleAddToCart = () => {
-    if (productSize=="") {
-      alert("Please select a size before buy!");
-
-      return;
-    }
-  };
-  
 
   // Render the complete component
   return (
     <div className="inner-con-all-re">
-
       <div className="inner-con">
         <div className="inner-con-left">
           <div className="left-sample-image">
@@ -101,7 +116,6 @@ const InnerDisplay = () => {
             <div className="imageslider">
               <div className="carousel">
                 <div className="carousel-container">
-
                   <img
                     src={media[currentIndex].src}
                     alt={`Slide ${currentIndex + 1}`}
@@ -142,21 +156,17 @@ const InnerDisplay = () => {
             </div>
             <h2>Size</h2>
             <div className="size-cont" >
-
               {product.size_options.map((size, index) => (
                 <div
-                className={`size-css ${productSize === size ? "selected" : "" }` }
-                key={index}
-                onClick={() => {
-                  setProductSize(size);
-                }
-              }
-            
-              >
+                  className={`size-css ${productSize === size ? "selected" : ""}`}
+                  key={index}
+                  onClick={() => {
+                    setProductSize(size);
+                  }}
+                >
                   {size}
                 </div>
               ))}
-
             </div>
 
             <div className="inner-colors">
@@ -193,8 +203,8 @@ const InnerDisplay = () => {
             </div>
             <Link to="/delivery_address" className="add-location-link">
               <div className="add-location">
-                  <FaMapLocationDot className="add-location-icon" />
-                  <h4>Add Location</h4>
+                <FaMapLocationDot className="add-location-icon" />
+                <h4>Add Location</h4>
               </div>
             </Link>
             <div className="quantity-con-last">
@@ -235,37 +245,43 @@ const InnerDisplay = () => {
                   <p>BUY</p>
                 </div>
               ) : (
-              <Link to="/cart" ><div className="buy-btn" onClick={() => {
-                  addToCart(product.id, productSize, selectCount);
-                  handleClick()
-                  handleAddToCart()
-
-                }
-                }>
-                  <p>Buy</p>
-                </div>
+                <Link to="/cart">
+                  <div
+                    className="buy-btn"
+                    onClick={() => {
+                      if (handleAddToCart()) {
+                        addToCart(product.id, productSize, selectCount);
+                        handleClick();
+                      }
+                    }}
+                  >
+                    <p>Buy</p>
+                  </div>
                 </Link>
               )}
-              
+
               {product.product_count <= 0 ? (
                 <div className="buy-btn btn-disabled">
                   <p>Add To Cart</p>
                 </div>
               ) : (
-                <div className="add-cart" onClick={() => {
-                  addToCart(product.id, productSize, selectCount);
-                  handleClick()
-                  handleAddToCart()
-
-                }
-                }>
+                <div
+                  className="add-cart"
+                  onClick={() => {
+                    if (handleAddToCart()) {
+                      addToCart(product.id, productSize, selectCount);
+                      handleClick();
+                    }
+                  }}
+                >
                   <p>Add To Cart</p>
                 </div>
               )}
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {isLoading && <p>Syncing cart...</p>}
           </div>
         </div>
-
       </div>
       <div className="inner-review">
         {product?.reviews && <Review Reviews={product.reviews} ProductId={product.id} />}

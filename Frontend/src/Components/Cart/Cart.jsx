@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../../Context/ShopContext";
@@ -6,13 +6,18 @@ import { MdCancel } from "react-icons/md";
 
 const Cart = () => {
     const { all_product, cartItem, removeFromCart } = useContext(ShopContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const userId = localStorage.getItem("userId");
+
+    const hasSyncedCart = useRef(false);
+    const cartHashRef = useRef("");
 
     const getTotalCartAmount = () => {
         let total = 0;
         all_product.forEach((product) => {
-            if (cartItem[product.id] && cartItem[product.id].length > 0) {
+            if (cartItem[product.id]?.length > 0) {
                 cartItem[product.id].forEach(item => {
                     total += product.new_price * item.quantity;
                 });
@@ -23,50 +28,30 @@ const Cart = () => {
 
     const totalPrice = getTotalCartAmount();
 
-    const isCartEmpty = Object.values(cartItem).every(items => items.length === 0);
+    const isCartEmpty = Object.values(cartItem).every(items => !items || items.length === 0);
+
+    
 
     const handleBuyNow = async () => {
-        if (isCartEmpty || !userId) {
-            alert("Cart is empty or user not logged in.");
+        if (isCartEmpty) {
+            setErrorMessage("Your cart is empty. Please add products first.");
             return;
         }
 
-        // Prepare the cartItems array
-        const cartItemsToSend = [];
-
-        all_product.forEach((product) => {
-            if (cartItem[product.id]) {
-                cartItem[product.id].forEach((item) => {
-                    cartItemsToSend.push({
-                        productId: product.id,
-                        productSize: item.size || 'XL',
-                        selectCount: item.quantity
-                    });
-                });
-            }
-        });
-
-        try {
-            const response = await fetch("https://southerntexport-e-commerce.onrender.com/addcart", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ userId, cartItems: cartItemsToSend }),
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                alert("Cart saved successfully!");
-                // Optionally: clear the cart or redirect
-            } else {
-                alert("Failed to save cart: " + data.message);
-            }
-        } catch (error) {
-            console.error("Error saving cart:", error);
-            alert("Something went wrong. Try again.");
+        if (!userId) {
+            setErrorMessage("Please log in to continue.");
+            return;
         }
+
+        setIsLoading(true);
+        setErrorMessage("");
+
+        // Add your purchase logic here
+        console.log("Proceeding to checkout...");
+        setTimeout(() => {
+            setIsLoading(false);
+            alert("Purchase successful (mock)");
+        }, 1500);
     };
 
     useEffect(() => {
@@ -98,7 +83,7 @@ const Cart = () => {
                     </div>
                 ) : (
                     all_product.map((product) => {
-                        if (cartItem[product.id] && cartItem[product.id].length > 0) {
+                        if (cartItem[product.id]?.length > 0) {
                             return cartItem[product.id].map((item, index) => (
                                 <div key={`${product.id}-${item.size}-${index}`}>
                                     <div className="cartitems-format cartitems-main">
@@ -123,6 +108,12 @@ const Cart = () => {
                 )}
             </div>
 
+            {errorMessage && (
+                <div className="error-message">
+                    <p>{errorMessage}</p>
+                </div>
+            )}
+
             <div className="cartitems-down">
                 <div className="cartitem-total">
                     <h1>Cart Totals</h1>
@@ -138,8 +129,11 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <button disabled={isCartEmpty} onClick={handleBuyNow}>
-                        Buy Now
+                    <button
+                        disabled={isLoading || isCartEmpty}
+                        onClick={handleBuyNow}
+                    >
+                        {isLoading ? "Processing..." : "Buy Now"}
                     </button>
                 </div>
             </div>
