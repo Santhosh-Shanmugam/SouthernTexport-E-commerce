@@ -56,9 +56,7 @@ const InnerDisplay = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Cart syncing useEffect - moved outside of handlers
-  // Replace your current cart sync useEffect with this improved version
-  // Updated cart syncing function - replace your current cart sync useEffect with this version
+
 
 
   const nextSlide = () => {
@@ -88,13 +86,13 @@ const InnerDisplay = () => {
       alert("Please select a size before adding to cart!");
       return false;
     }
-    
+
     // Add the product to cart with the selected size and quantity
     addToCart(product.id, productSize, selectCount);
-    
+
     // Show the success alert
     setShowAlert(true);
-    
+
     return true;
   };
 

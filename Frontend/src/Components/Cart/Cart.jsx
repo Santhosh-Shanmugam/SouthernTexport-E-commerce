@@ -5,9 +5,10 @@ import { ShopContext } from "../../Context/ShopContext";
 import { MdCancel } from "react-icons/md";
 
 const Cart = () => {
-    const { all_product, cartItem, removeFromCart } = useContext(ShopContext);
+    const { all_product, cartItem, removeFromCart, updateCartFromServer } = useContext(ShopContext);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isSyncing, setIsSyncing] = useState(false);
 
     const userId = localStorage.getItem("userId");
 
@@ -30,7 +31,47 @@ const Cart = () => {
 
     const isCartEmpty = Object.values(cartItem).every(items => !items || items.length === 0);
 
-    
+    // Fetch cart from backend and sync with local cart
+    const syncCartWithBackend = async () => {
+        if (!userId || hasSyncedCart.current) return;
+        
+        try {
+            setIsSyncing(true);
+            const response = await fetch(`/getcart/${userId}`);
+            
+          
+            const data = await response.json();
+            
+            if (data.success && data.cart) {
+                // Convert server cart format to local cart format
+                const serverCart = {};
+                
+                data.cart.cartItems.forEach(item => {
+                    const { productId, productSize, selectCount } = item;
+                    
+                    if (!serverCart[productId]) {
+                        serverCart[productId] = [];
+                    }
+                    
+                    serverCart[productId].push({
+                        size: productSize,
+                        quantity: selectCount
+                    });
+                });
+                
+                // Update the context with server cart
+                if (updateCartFromServer) {
+                    updateCartFromServer(serverCart);
+                }
+                
+                hasSyncedCart.current = true;
+            }
+        } catch (error) {
+            console.error("Error syncing cart:", error);
+        } finally {
+            setIsSyncing(false);
+        }
+    };
 
     const handleBuyNow = async () => {
         if (isCartEmpty) {
@@ -54,9 +95,44 @@ const Cart = () => {
         }, 1500);
     };
 
+    const clearCart = async () => {
+        if (!userId || isCartEmpty) return;
+        
+        try {
+            setIsLoading(true);
+            const response = await fetch(`/clearcart/${userId}`, {
+                method: 'DELETE',
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to clear cart');
+            }
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Reset local cart or handle in context
+                // This depends on how your ShopContext is implemented
+                if (updateCartFromServer) {
+                    updateCartFromServer({});
+                }
+            }
+        } catch (error) {
+            console.error("Error clearing cart:", error);
+            setErrorMessage("Failed to clear cart");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []);
+        
+        // Sync cart with backend when component mounts
+        if (userId) {
+            syncCartWithBackend();
+        }
+    }, [userId]);
 
     return (
         <div className="cartitems">
@@ -65,6 +141,12 @@ const Cart = () => {
                     <p>Shop Now</p>
                 </div>
             </Link>
+
+            {isSyncing && (
+                <div className="syncing-message">
+                    <p>Syncing your cart...</p>
+                </div>
+            )}
 
             <div className="carttiemsmap">
                 <div className="cartitems-main">
@@ -135,6 +217,16 @@ const Cart = () => {
                     >
                         {isLoading ? "Processing..." : "Buy Now"}
                     </button>
+                    
+                    {!isCartEmpty && (
+                        <button 
+                            className="clear-cart-btn"
+                            disabled={isLoading}
+                            onClick={clearCart}
+                        >
+                            Clear Cart
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

@@ -167,7 +167,6 @@ app.post('/addcart', async (req, res) => {
     });
   }
 });
-
 app.get('/getcart/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
@@ -183,6 +182,31 @@ app.get('/getcart/:userId', async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to fetch cart" });
   }
 });
+
+// Update or create cart
+app.post('/updatecart', async (req, res) => {
+  try {
+    const { userId, cartItems } = req.body;
+    
+    if (!userId) {
+      return res.status(400).json({ success: false, message: "User ID is required" });
+    }
+    
+    // Find and update, or create if doesn't exist (upsert)
+    const updatedCart = await CartModel.findOneAndUpdate(
+      { userId },
+      { userId, cartItems },
+      { new: true, upsert: true }
+    );
+    
+    res.json({ success: true, cart: updatedCart });
+  } catch (err) {
+    console.error("Error updating cart:", err);
+    res.status(500).json({ success: false, message: "Failed to update cart" });
+  }
+});
+
+// Clear cart for a specific user
 app.delete('/clearcart/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
@@ -193,8 +217,6 @@ app.delete('/clearcart/:userId', async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to clear cart" });
   }
 });
-// Optional: Add a route to clear cart
-
 // Rating
 app.post("/product/:id/review", upload.single("image"), async (req, res) => {
   const productId = Number(req.params.id);
