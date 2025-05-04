@@ -41,15 +41,17 @@
     color: white;
 }
 
-/* Desktop Navbar */
 .nav-list {
     display: flex;
-    gap: 50px;
+    gap: 40px;
     align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
     margin-right: 40px;
+}
+.nav-list li{
+    font-size:16px;
 }
 
 .nav-list a {
@@ -143,4 +145,9 @@
     font-size: 16px;
     font-family: sans-serif;
     transition: background-color 0.3s ease-in-out;
+}
+.cart-icon-nav{
+    width: 30px;
+    height: 30px;
+  
 }

@@ -20,9 +20,9 @@ const Navbar = () => {
     localStorage.removeItem('userId');
     handleSuccess('User Loggedout');
     setTimeout(() => {
-        navigate('/login');
+      navigate('/login');
     }, 1000)
-}
+  }
 
   return (
     <nav className="navbar">
@@ -35,11 +35,11 @@ const Navbar = () => {
 
         {/* Desktop Nav List (always visible) */}
         <ul className="nav-list">
-          <Link to="/"><li className="nav-item">Home</li></Link>
-          <Link to="/men"><li className="nav-item">Men</li></Link>
-          <Link to="/women"><li className="nav-item">Women</li></Link>
-          <Link to="/kids"><li className="nav-item">Kids</li></Link>
-          <Link to="/cart"><li className="nav-item">Cart</li></Link>
+          <Link to="/"><li className="nav-item">HOME</li></Link>
+          <Link to="/men"><li className="nav-item">MEN</li></Link>
+          <Link to="/women"><li className="nav-item">WOMEN</li></Link>
+          <Link to="/kids"><li className="nav-item">KIDS</li></Link>
+          <Link to="/cart"><li className="nav-item"><IoCart className="cart-icon-nav"></IoCart></li></Link>
           <button className='logout-button' onClick={handleLogout}>Logout</button>
         </ul>
 
@@ -52,11 +52,11 @@ const Navbar = () => {
         {menuOpen && (
           <div className="dropdown-menu">
             <ul>
-              <Link to="/" onClick={toggleMenu}><li className="nav-item">Home</li></Link>
-              <Link to="/men" onClick={toggleMenu}><li className="nav-item">Men</li></Link>
-              <Link to="/women" onClick={toggleMenu}><li className="nav-item">Women</li></Link>
-              <Link to="/kids" onClick={toggleMenu}><li className="nav-item">Kids</li></Link>
-              <Link to="/cart"><li className="nav-item">Cart</li></Link>
+              <Link to="/" onClick={toggleMenu}><li className="nav-item">HOME</li></Link>
+              <Link to="/men" onClick={toggleMenu}><li className="nav-item">MEN</li></Link>
+              <Link to="/women" onClick={toggleMenu}><li className="nav-item">WOMEN</li></Link>
+              <Link to="/kids" onClick={toggleMenu}><li className="nav-item">KIDS</li></Link>
+              <Link to="/cart"><li className="nav-item">CART</li></Link>
               <button className='logout-button' onClick={handleLogout}>Logout</button>
             </ul>
           </div>
