@@ -358,3 +358,30 @@ body {
 }
 
 /* Extra small mobile: max 400px */
+
+
+.disabled-link {
+  pointer-events: none;
+}
+
+.buy-now-btn {
+  width: 100%;
+  height: 50px;
+  background: #ff5a5a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.buy-now-btn:hover {
+  background: #ff3333;
+}
+
+.buy-now-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
