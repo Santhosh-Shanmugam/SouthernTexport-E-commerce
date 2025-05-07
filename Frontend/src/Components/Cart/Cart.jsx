@@ -1,20 +1,21 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import "./Cart.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShopContext } from "../../Context/ShopContext";
 import { MdCancel } from "react-icons/md";
+import axios from "axios";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { all_product, cartItem, removeFromCart, updateCartFromServer } =
     useContext(ShopContext);
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSyncing, setIsSyncing] = useState(false);
 
   const userId = localStorage.getItem("userId");
-
   const hasSyncedCart = useRef(false);
-  const cartHashRef = useRef("");
 
   const getTotalCartAmount = () => {
     let total = 0;
@@ -28,40 +29,78 @@ const Cart = () => {
     return total;
   };
 
-  const totalPrice = getTotalCartAmount();
-
   const isCartEmpty = Object.values(cartItem).every(
     (items) => !items || items.length === 0
   );
 
-  // Fetch cart from backend and sync with local cart
+  const handleBuyNowData = async () => {
+    if (isCartEmpty || !userId) return;
+
+    setIsLoading(true);
+
+    try {
+      const cartItems = [];
+
+      all_product.forEach((product) => {
+        if (cartItem[product.id]?.length > 0) {
+          cartItem[product.id].forEach((item) => {
+            cartItems.push({
+              productId: product.id,
+              productSize: item.size,
+              selectCount: item.quantity,
+            });
+          });
+        }
+      });
+      const productId = cartItems[0].productId;
+      const productSize = cartItems[0].productSize;
+      const selectCount = cartItems[0].selectCount;
+
+      const response = await axios.post(
+        `https://southerntexport-e-commerce.onrender.com/api/buy_details/`,
+        {
+          userId,
+          productId,
+          productSize,
+          selectCount,
+        }
+      );
+
+      if (response.data.success) {
+        navigate("/payments");
+      } else {
+        alert("Failed to place order: " + response.data.message);
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Something went wrong while placing the order.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const syncCartWithBackend = async () => {
     if (!userId || hasSyncedCart.current) return;
 
     try {
       setIsSyncing(true);
       const response = await fetch(`/getcart/${userId}`);
-
       const data = await response.json();
 
       if (data.success && data.cart) {
-        // Convert server cart format to local cart format
         const serverCart = {};
 
         data.cart.cartItems.forEach((item) => {
           const { productId, productSize, selectCount } = item;
-
           if (!serverCart[productId]) {
             serverCart[productId] = [];
           }
-
           serverCart[productId].push({
             size: productSize,
             quantity: selectCount,
           });
         });
 
-        // Update the context with server cart
         if (updateCartFromServer) {
           updateCartFromServer(serverCart);
         }
@@ -75,28 +114,6 @@ const Cart = () => {
     }
   };
 
-  const handleBuyNow = async () => {
-    if (isCartEmpty) {
-      setErrorMessage("Your cart is empty. Please add products first.");
-      return;
-    }
-
-    if (!userId) {
-      setErrorMessage("Please log in to continue.");
-      return;
-    }
-
-    setIsLoading(true);
-    setErrorMessage("");
-
-    // Add your purchase logic here
-    console.log("Proceeding to checkout...");
-    setTimeout(() => {
-      setIsLoading(false);
-      alert("Purchase successful (mock)");
-    }, 1500);
-  };
-
   const clearCart = async () => {
     if (!userId || isCartEmpty) return;
 
@@ -106,18 +123,10 @@ const Cart = () => {
         method: "DELETE",
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to clear cart");
-      }
-
       const data = await response.json();
 
-      if (data.success) {
-        // Reset local cart or handle in context
-        // This depends on how your ShopContext is implemented
-        if (updateCartFromServer) {
-          updateCartFromServer({});
-        }
+      if (data.success && updateCartFromServer) {
+        updateCartFromServer({});
       }
     } catch (error) {
       console.error("Error clearing cart:", error);
@@ -129,12 +138,12 @@ const Cart = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    // Sync cart with backend when component mounts
     if (userId) {
       syncCartWithBackend();
     }
   }, [userId]);
+
+  const totalPrice = getTotalCartAmount();
 
   return (
     <div className="cartitems">
@@ -220,14 +229,13 @@ const Cart = () => {
             </div>
           </div>
 
-          <Link
-            to={isCartEmpty ? "#" : "/payments"}
-            className={isCartEmpty ? "disabled-link" : ""}
+          <button
+            onClick={handleBuyNowData}
+            disabled={isLoading || isCartEmpty}
+            className="buy-now-btn"
           >
-            <button disabled={isLoading || isCartEmpty} className="buy-now-btn">
-              {isLoading ? "Processing..." : "Buy Now"}
-            </button>
-          </Link>
+            {isLoading ? "Processing..." : "Buy Now"}
+          </button>
 
           {!isCartEmpty && (
             <button

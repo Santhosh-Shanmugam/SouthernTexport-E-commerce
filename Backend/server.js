@@ -7,8 +7,10 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const Product = require('./Models/productModels');
 const AuthRouter = require('./Routes/AuthRouter');
 const deliveryAddressRoutes = require('./Routes/deliveryAddressRoutes');
+const buyDetailRoutes = require('./Routes/buyDetailRoutes')
 const Schema = mongoose.Schema;
 app.use(express.json());
 app.use(cors());
@@ -16,6 +18,7 @@ app.use("/images", express.static("upload/images"));
 app.use(bodyParser.json());
 app.use('/auth', AuthRouter);
 app.use('/api/delivery', deliveryAddressRoutes);
+app.use('/api/buy_details', buyDetailRoutes);
 
 // Connect to MongoDB using .env
 mongoose.connect(process.env.MONGO_URL)
@@ -49,41 +52,7 @@ app.post("/upload", upload.single("image"), (req, res) => {
   });
 });
 
-// Define Product Schema
-const productSchema = new mongoose.Schema({
-  id: Number,
-  image1: String,
-  image2: String,
-  image3: String,
-  name: String,
-  old_price: Number,
-  new_price: Number,
-  category: String,
-  offer: String,
-  color: String,
-  fabric: String,
-  delivery: String,
-  full_name: String,
-  rating: Number,
-  size_options: [String],
-  product_count: { type: Number, default: 0 },
-  product_status: String,
-  description: String,
-  reviews: [
-    {
-      user: String,
-      rating: Number,
-      comment: String,
-      revImage: String,
-      date: { type: Date, default: Date.now }
-    }
-  ],
-  date: { type: Date, default: Date.now },
-  available: { type: Boolean, default: true }
-});
 
-// Create Product Model
-const Product = mongoose.model("Product", productSchema);
 // Required packages and setup remain the same above...
 
 // Updated Cart Schema with better validation
@@ -326,3 +295,6 @@ app.listen(port, (error) => {
     console.log("Error starting server: " + error);
   }
 });
+
+
+module.exports = Product;
