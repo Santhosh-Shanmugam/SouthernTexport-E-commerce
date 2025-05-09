@@ -114,7 +114,7 @@ const Payment = () => {
                   value={formData.fullName}
                   onChange={handleChange}
                   required
-                  placeholder="John Doe"
+                  placeholder="Your Name"
                 />
               </div>
               
@@ -127,7 +127,7 @@ const Payment = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="johndoe@example.com"
+                  placeholder="name@example.com"
                 />
               </div>
               
@@ -167,7 +167,7 @@ const Payment = () => {
                     value={formData.city}
                     onChange={handleChange}
                     required
-                    placeholder="Mumbai"
+                    placeholder="Tirupur"
                   />
                 </div>
                 
@@ -180,7 +180,7 @@ const Payment = () => {
                     value={formData.state}
                     onChange={handleChange}
                     required
-                    placeholder="Maharashtra"
+                    placeholder="Tamil Nadu"
                   />
                 </div>
               </div>
