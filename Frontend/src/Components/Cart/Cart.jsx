@@ -116,25 +116,32 @@ const Cart = () => {
 
   const clearCart = async () => {
     if (!userId || isCartEmpty) return;
-
+  
     try {
       setIsLoading(true);
-      const response = await fetch(`/clearcart/${userId}`, {
-        method: "DELETE",
-      });
-
+      const response = await fetch(
+        `https://southerntexport-e-commerce.onrender.com/clearcart/${userId}`,
+        {
+          method: "DELETE",
+        }
+      );
+  
       const data = await response.json();
-
+      console.log("Clear cart response:", data);
+  
       if (data.success && updateCartFromServer) {
         updateCartFromServer({});
+        setErrorMessage(""); // Clear any previous error
+      } else {
+        console.error("Failed to clear cart:", data.message);
       }
     } catch (error) {
       console.error("Error clearing cart:", error);
-      setErrorMessage("Failed to clear cart");
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -148,9 +155,9 @@ const Cart = () => {
   return (
     <div className="cartitems">
       <Link to="/men">
-        <div className="shop-now-cart">
+        {/* <div className="shop-now-cart">
           <p>Shop Now</p>
-        </div>
+        </div> */}
       </Link>
 
       {isSyncing && (
