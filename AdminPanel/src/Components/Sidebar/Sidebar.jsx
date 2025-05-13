@@ -1,45 +1,29 @@
-import React from 'react'
-import './Sidebar.css'
-import c12 from '../AssertsAdmin/c12.png'
-import folder from '../AssertsAdmin/folder.png'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaPlusCircle, FaListUl, FaShoppingCart } from 'react-icons/fa';
+import './Sidebar.css';
+
 const Sidebar = () => {
   return (
-    <div className='sidebar-all'>
-    <div className="admin-slider-main">
-        <Link to={'/addproduct'} style={{textDecoration:"none"}}>
-        <div className="admin-slider-cart-main">
-            <>
-            <img src={c12}></img>
-            </>
-            <>
-            <p>Add Product</p>
-            </>
-        </div>
+    <div className='sidebar-container'>
+      <div className="sidebar-row">
+        <Link to="/addproduct" className="sidebar-card">
+          <FaPlusCircle className="sidebar-icon" />
+          <p>Add Product</p>
         </Link>
-        <Link to={'/allproducts'} style={{textDecoration:"none"}}>
-        <div className="admin-slider-cart-main">
-            <>
-            <img className='uniqimg' src={folder}></img>
-            </>
-            <>
-            <p>List Products</p>
-            </>
-        </div>
-        </Link>
-        <Link to={'/order'} style={{textDecoration:"none"}}>
-        <div className="admin-slider-cart-main">
-          <>
-            <img className='uniqimg' src={folder}></img>
-            </> 
-            <>
-            <p>Users Order</p>
-            </>
-        </div>
-        </Link>
-    </div>
-    </div>
-  )
-}
 
-export default Sidebar
+        <Link to="/allproducts" className="sidebar-card">
+          <FaListUl className="sidebar-icon" />
+          <p>List Products</p>
+        </Link>
+
+        <Link to="/order" className="sidebar-card">
+          <FaShoppingCart className="sidebar-icon" />
+          <p>Users Order</p>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;
