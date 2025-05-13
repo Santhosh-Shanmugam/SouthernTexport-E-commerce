@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { ShopContext } from '../../Context/ShopContext';
 import './Payment.css';
 import { FaCreditCard, FaLock } from 'react-icons/fa';
+import axios from 'axios'; // Import axios
 
 const Payment = () => {
   const { all_product, cartItem } = useContext(ShopContext);
@@ -15,6 +16,7 @@ const Payment = () => {
     state: '',
     zipCode: ''
   });
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // Calculate order summary
   const getTotalCartAmount = () => {
@@ -36,13 +38,13 @@ const Payment = () => {
   useEffect(() => {
     // Set amount from cart total
     setAmount(finalTotal.toString());
-    
+
     // Load Razorpay script
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
     script.async = true;
     document.body.appendChild(script);
-    
+
     return () => {
       document.body.removeChild(script);
     };
@@ -57,22 +59,79 @@ const Payment = () => {
     });
   };
 
+  // Update inventory function
+  const updateProductInventory = async (paymentId) => {
+    try {
+      const userId = localStorage.getItem("userId");
+      if (!userId) return;
+
+      // Prepare order items data
+      const orderItems = [];
+      all_product.forEach((product) => {
+        if (cartItem[product.id]?.length > 0) {
+          cartItem[product.id].forEach(item => {
+            orderItems.push({
+              productId: product.id,
+              quantity: item.quantity,
+              size: item.size
+            });
+          });
+        }
+      });
+
+      // Send request to update inventory
+      const response = await axios.post('https://southerntexport-e-commerce.onrender.com/api/update-inventory', {
+        userId,
+        paymentId,
+        orderItems,
+        shippingDetails: {
+          fullName: formData.fullName,
+          email: formData.email,
+          contact: formData.contact,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zipCode: formData.zipCode
+        }
+      });
+
+      if (response.data.success) {
+        // Clear cart after successful order
+        await axios.delete(`https://southerntexport-e-commerce.onrender.com/clearcart/${userId}`);
+        alert('Order placed successfully!');
+        // Redirect to order confirmation or home page
+        window.location.href = '/order-confirmation';
+      } else {
+        alert('Failed to complete order: ' + response.data.message);
+      }
+    } catch (error) {
+      console.error('Error updating inventory:', error);
+      alert('There was an issue processing your order. Please contact support.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if(amount === "") {
+
+    if (amount === "") {
       alert("Please enter amount");
     } else {
+      setIsProcessing(true);
+      
       // Razorpay configuration
       var options = {
-        key: "rzp_test_1Be4hjU2M9caQO", 
-        key_secret: "SVqpIzF3TfroEXG2AhAoX1A7", 
-        amount: amount * 100, 
+        key: "rzp_test_1Be4hjU2M9caQO",
+        key_secret: "SVqpIzF3TfroEXG2AhAoX1A7",
+        amount: amount * 100,
         currency: "INR",
         name: "Southern Texport",
         description: "Payment for your order",
-        handler: function(response) {
+        handler: function (response) {
           alert(response.razorpay_payment_id);
+          // Update inventory after successful payment
+          updateProductInventory(response.razorpay_payment_id);
         },
         prefill: {
           name: formData.fullName,
@@ -87,9 +146,14 @@ const Payment = () => {
         },
         theme: {
           color: "#ff5a5a"
+        },
+        modal: {
+          ondismiss: function() {
+            setIsProcessing(false);
+          }
         }
       };
-      
+
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     }
@@ -98,13 +162,13 @@ const Payment = () => {
   return (
     <div className="payment-container">
       <h1>Checkout</h1>
-      
+
       <div className="payment-layout">
         <div className="payment-form-section">
           <form onSubmit={handleSubmit}>
             <div className="payment-section">
               <h2><FaLock /> Billing Information</h2>
-              
+
               <div className="form-group">
                 <label htmlFor="fullName">Full Name</label>
                 <input
@@ -117,7 +181,7 @@ const Payment = () => {
                   placeholder="Your Name"
                 />
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="email">Email Address</label>
                 <input
@@ -130,7 +194,7 @@ const Payment = () => {
                   placeholder="name@example.com"
                 />
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="contact">Contact Number</label>
                 <input
@@ -143,7 +207,7 @@ const Payment = () => {
                   placeholder="9944229933"
                 />
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="address">Address</label>
                 <input
@@ -156,7 +220,7 @@ const Payment = () => {
                   placeholder="123 Main St"
                 />
               </div>
-              
+
               <div className="form-row">
                 <div className="form-group half">
                   <label htmlFor="city">City</label>
@@ -170,7 +234,7 @@ const Payment = () => {
                     placeholder="Tirupur"
                   />
                 </div>
-                
+
                 <div className="form-group half">
                   <label htmlFor="state">State</label>
                   <input
@@ -184,7 +248,7 @@ const Payment = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="zipCode">Zip Code</label>
                 <input
@@ -198,20 +262,21 @@ const Payment = () => {
                 />
               </div>
             </div>
-            
-            <button 
-              type="submit" 
+
+            <button
+              type="submit"
               className="pay-button"
+              disabled={isProcessing}
             >
-              Pay ₹{amount}
+              {isProcessing ? "Processing..." : `Pay ₹${amount}`}
             </button>
           </form>
         </div>
-        
+
         <div className="order-summary-section">
           <div className="order-summary">
             <h2>Order Summary</h2>
-            
+
             <div className="order-items">
               {all_product.map((product) => {
                 if (cartItem[product.id]?.length > 0) {
@@ -236,7 +301,7 @@ const Payment = () => {
                 return null;
               })}
             </div>
-            
+
             <div className="price-breakdown">
               <div className="price-row">
                 <span>Subtotal</span>
