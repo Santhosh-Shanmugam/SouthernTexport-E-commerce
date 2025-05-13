@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const DeliveryAddress = require('./Models/DeliveryAddress');
+const BuyDetails = require('./Models/buyDetails');
 const Product = require('./Models/productModels');
 const AuthRouter = require('./Routes/AuthRouter');
 const deliveryAddressRoutes = require('./Routes/deliveryAddressRoutes');
@@ -287,7 +289,28 @@ app.get('/allproducts', async (req, res) => {
   res.send(products);
 });
 
-// Start Server
+
+
+//-----
+
+app.get('/carts', async (req, res) => {
+    let cartsitem = await CartModel.find({});
+    console.log("All products retrieved from database");
+    res.send(cartsitem);
+});
+
+app.get('/delivery', async (req, res) => {
+    let deliveryadd = await DeliveryAddress.find({});
+    console.log("All products retrieved from database");
+    res.send(deliveryadd);
+});
+
+app.get('/buydetails', async (req, res) => {
+    let buying = await BuyDetails.find({});
+    console.log("All products retrieved from database");
+    res.send(buying);
+});
+
 app.listen(port, (error) => {
   if (!error) {
     console.log("Server is running on port: " + port);

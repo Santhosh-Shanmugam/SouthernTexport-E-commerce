@@ -27,6 +27,16 @@ const Sidebar = () => {
             </>
         </div>
         </Link>
+        <Link to={'/order'} style={{textDecoration:"none"}}>
+        <div className="admin-slider-cart-main">
+          <>
+            <img className='uniqimg' src={folder}></img>
+            </> 
+            <>
+            <p>Users Order</p>
+            </>
+        </div>
+        </Link>
     </div>
     </div>
   )
