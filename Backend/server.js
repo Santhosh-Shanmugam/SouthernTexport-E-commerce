@@ -44,13 +44,22 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Image Upload Route
-app.post("/upload", upload.single("image"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ success: 0, message: "No file uploaded" });
+app.post("/upload", upload.fields([
+  { name: "image1", maxCount: 1 },
+  { name: "image2", maxCount: 1 },
+  { name: "image3", maxCount: 1 }
+]), (req, res) => {
+  if (!req.files || !req.files.image1 || !req.files.image2 || !req.files.image3) {
+    return res.status(400).json({ success: 0, message: "All images are required" });
   }
+
   res.json({
     success: 1,
-    image_url: `https://southerntexport-e-commerce.onrender.com/images/${req.file.filename}`
+    imageUrls: [
+      `https://southerntexport-e-commerce.onrender.com/images/${req.files.image1[0].filename}`,
+      `https://southerntexport-e-commerce.onrender.com/images/${req.files.image2[0].filename}`,
+      `https://southerntexport-e-commerce.onrender.com/images/${req.files.image3[0].filename}`,
+    ]
   });
 });
 
