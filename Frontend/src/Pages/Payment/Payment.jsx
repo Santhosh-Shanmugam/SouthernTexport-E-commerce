@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { ShopContext } from '../../Context/ShopContext';
 import './Payment.css';
 import { FaCreditCard, FaLock } from 'react-icons/fa';
-import axios from 'axios'; // Import axios
+import axios from 'axios';
 
 const Payment = () => {
   const { all_product, cartItem } = useContext(ShopContext);
@@ -36,10 +36,10 @@ const Payment = () => {
   const finalTotal = totalPrice + shippingCost;
 
   useEffect(() => {
-    // Set amount from cart total
+    
     setAmount(finalTotal.toString());
 
-    // Load Razorpay script
+    
     const script = document.createElement('script');
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
     script.async = true;
@@ -130,7 +130,6 @@ const Payment = () => {
         description: "Payment for your order",
         handler: function (response) {
           alert(response.razorpay_payment_id);
-          // Update inventory after successful payment
           updateProductInventory(response.razorpay_payment_id);
         },
         prefill: {

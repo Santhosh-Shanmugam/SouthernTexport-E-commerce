@@ -56,7 +56,7 @@ const AddProduct = () => {
       formData.append("image3", productDetails.image3);
 
       // Upload images first
-      const uploadResponse = await fetch('http://localhost:4000/upload', {
+      const uploadResponse = await fetch('https://southerntexport-e-commerce.onrender.com/upload', {
         method: 'POST',
         body: formData,
       });
