@@ -16,6 +16,7 @@ const AddProduct = () => {
     full_name: "",
     rating: "",
     size_options: "",
+    product_count: "",
     product_status: "",
     description: "",
     image1: null,
@@ -75,6 +76,7 @@ const AddProduct = () => {
           delivery: productDetails.delivery,
           full_name: productDetails.full_name,
           rating: Number(productDetails.rating),
+          product_count: Number(productDetails.product_count),
           size_options: productDetails.size_options.split(',').map(size => size.trim()), // Comma separated sizes
           product_status: productDetails.product_status,
           description: productDetails.description,
@@ -107,6 +109,8 @@ const AddProduct = () => {
             full_name: "",
             rating: "",
             size_options: "",
+            product_count: "",
+
             product_status: "",
             description: "",
             image1: null,
@@ -132,7 +136,6 @@ const AddProduct = () => {
       <div className="addproduct-items">
         <h1>ADD PRODUCT</h1>
 
-        {/* Form Fields */}
         {[
           { label: "Product ID", name: "id" },
           { label: "Product Name", name: "name" },
@@ -146,6 +149,7 @@ const AddProduct = () => {
           { label: "Full Name", name: "full_name" },
           { label: "Rating", name: "rating" },
           { label: "Size Options (comma separated)", name: "size_options" },
+          { label: "Product Count", name: "product_count" },
           { label: "Product Status", name: "product_status" },
           { label: "Description", name: "description" },
         ].map((field) => (

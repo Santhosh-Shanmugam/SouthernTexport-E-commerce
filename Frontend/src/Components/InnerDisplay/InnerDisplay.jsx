@@ -192,7 +192,7 @@ const InnerDisplay = () => {
             <div className="descrip">
               <p><span>Description:</span>{product.description}</p>
             </div>
-            <p className="last-con-price">₹{product.new_price}</p>
+            <p className="last-con-price">{product.offer}</p>
             <div className="stock-left-last">
               <p className="stock-left-last-p">Stock Left: {product.product_count}</p>
             </div>
@@ -246,12 +246,13 @@ const InnerDisplay = () => {
                 <Link to="/cart">
                   <div
                     className="buy-btn"
+                  
                     onClick={() => {
-                      if (handleAddToCart()) {
-                        addToCart(product.id, productSize, selectCount);
-                        handleClick();
-                      }
-                    }}
+                    if (handleAddToCart()) {
+                      addToCart(product.id, productSize, selectCount);
+                      handleClick();
+                    }
+                  }}
                   >
                     <p>Buy</p>
                   </div>
