@@ -11,17 +11,17 @@ const Items = ({ id, image1, image2, image3, name, new_price, old_price, offer, 
     const images = useMemo(() => [image1, image2, image3], [image1, image2, image3]);
 
 
-    useEffect(() => {
-        if (product_count <= 0) {
-            setStatus("Out of stock");
-        } else if (product_count <= 10) {
-            setStatus("Only few left");
-        } else if (product_count <= 20) {
-            setStatus("Hot Deal");
-        } else if (product_count > 40) {
-            setStatus("In Stock");
-        }
-    }, [product_count]);
+ useEffect(() => {
+    if (product_count <= 0) {
+        setStatus("Out of stock");
+    } else if (product_count <= 10) {
+        setStatus("Only few left");
+    } else if (product_count <= 20) {
+        setStatus("Hot Deal");
+    } else if (product_count <= 100) {
+        setStatus("In Stock");
+    } 
+}, [product_count]);
 
     const statusBgColor = {
         "Out of stock": "rgb(164, 168, 168)",
