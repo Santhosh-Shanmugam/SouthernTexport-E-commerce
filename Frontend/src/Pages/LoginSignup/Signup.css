@@ -1,6 +1,6 @@
 .auth-layout {
   background: white;
-    /* background: linear-gradient(to right, #667eea, #764ba2); */
+    background: linear-gradient(to right, #667eea, #764ba2);
     height: 100vh;
     display: flex;
     justify-content: center;
