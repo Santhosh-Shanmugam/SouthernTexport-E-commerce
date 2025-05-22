@@ -142,8 +142,16 @@ a {
     gap: 20px;
     justify-content: center;
 }
-
-
+.size-option{
+    gap: 20px;
+}
+.item-size{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    flex-direction: row;
+}
 @keyframes fadeIn {
     from {
         opacity: 0;
