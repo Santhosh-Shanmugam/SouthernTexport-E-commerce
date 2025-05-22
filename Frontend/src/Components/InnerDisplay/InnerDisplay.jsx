@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import './InnerDisplay.css';
 import { ShopContext } from '../../Context/ShopContext';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { MdLocalOffer } from "react-icons/md";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FaShoppingCart } from "react-icons/fa";
@@ -11,12 +11,14 @@ import { IoIosTrophy } from "react-icons/io";
 import { FaMapLocationDot } from "react-icons/fa6";
 import Review from '../Review/Review';
 import Discount from '../Discount/Discount';
+import axios from 'axios';
 
 const InnerDisplay = () => {
   // Always declare all hooks at the top level, before any conditional logic
   const [selectCount, setSelectCount] = useState(1); // Default to 1
   const { all_product, addToCart, cartItem } = useContext(ShopContext);
   const { productID } = useParams();
+  const navigate = useNavigate(); // Add this import and hook
   const [currentIndex, setCurrentIndex] = useState(0);
   const [productSize, setProductSize] = useState('');
   const [showAlert, setShowAlert] = useState(false);
@@ -56,9 +58,6 @@ const InnerDisplay = () => {
     window.scrollTo(0, 0);
   }, []);
 
-
-
-
   const nextSlide = () => {
     if (media.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % media.length);
@@ -87,8 +86,19 @@ const InnerDisplay = () => {
       return false;
     }
 
+    // Debug: Log the values being sent
+    console.log("Adding to cart:", {
+      productId: product.id,
+      productSize: productSize,
+      selectCount: selectCount,
+      productPrice: product.new_price
+    });
+
     // Add the product to cart with the selected size and quantity
     addToCart(product.id, productSize, selectCount);
+
+    // Debug: Log cart state after adding
+    console.log("Cart after adding:", cartItem);
 
     // Show the success alert
     setShowAlert(true);
@@ -96,10 +106,96 @@ const InnerDisplay = () => {
     return true;
   };
 
+  // Fixed handleBuyNowData function
+  const handleBuyNowData = async () => {
+    // Check if user is logged in
+    if (!userId) {
+      alert("Please login to continue with purchase!");
+      return;
+    }
+
+    // Check if size is selected
+    if (productSize === "") {
+      alert("Please select a size before buying!");
+      return;
+    }
+
+    // Check if quantity is valid
+    if (selectCount < 1 || selectCount > product.product_count) {
+      alert("Please select a valid quantity!");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // Use current product details instead of cart items
+      const response = await axios.post(
+        `https://southerntexport-e-commerce.onrender.com/api/buy_details/`,
+        {
+          userId,
+          productId: product.id,
+          productSize: productSize,
+          selectCount: selectCount,
+        }
+      );
+
+      if (response.data.success) {
+        navigate("/payments");
+      } else {
+        alert("Failed to place order: " + response.data.message);
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Something went wrong while placing the order.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Fixed quantity input handler
+  const handleQuantityChange = (e) => {
+    const inputValue = e.target.value;
+
+    // Allow empty string for user to clear the field
+    if (inputValue === '') {
+      setSelectCount('');
+      return;
+    }
+
+    const numValue = Number(inputValue);
+
+    // Check if it's a valid number
+    if (isNaN(numValue)) {
+      return; // Don't update if not a number
+    }
+
+    // Allow any positive number up to product count
+    if (numValue >= 1 && numValue <= product.product_count) {
+      setSelectCount(numValue);
+    } else if (numValue > product.product_count) {
+      // Set to max available if user tries to exceed
+      setSelectCount(product.product_count);
+    } else if (numValue < 1 && numValue > 0) {
+      // If decimal between 0 and 1, set to 1
+      setSelectCount(1);
+    }
+    // If 0 or negative, don't update (let onBlur handle it)
+  };
+
+  const handleQuantityBlur = () => {
+    // Ensure we have a valid quantity when user leaves the field
+    if (selectCount === '' || selectCount < 1) {
+      setSelectCount(1);
+    } else if (selectCount > product.product_count) {
+      setSelectCount(product.product_count);
+    }
+  };
+
   if (!product) {
     return <div>Loading product...</div>;
   }
-
+  { console.log("Product count:", product.product_count, "Type:", typeof product.product_count) }
   // Render the complete component
   return (
     <div className="inner-con-all-re">
@@ -207,21 +303,29 @@ const InnerDisplay = () => {
             </Link>
             <div className="quantity-con-last">
               <input
-                type="number"
+                type="text" // Changed from "number" to "text"
+                inputMode="numeric" // Shows numeric keyboard on mobile
+                pattern="[0-9]*" // Helps with numeric validation
                 placeholder="Qty"
-                min="1"
-                max={product.product_count}
                 value={selectCount === 0 ? '' : selectCount}
                 onChange={(e) => {
-                  let value = e.target.value === '' ? '' : Number(e.target.value);
-                  if (value !== '' && value < 1) return;
-                  if (value !== '' && value > product.product_count) return;
+                  const value = e.target.value;
 
-                  setSelectCount(value);
+                  // Allow empty string or valid numbers
+                  if (value === '' || /^[1-9]\d*$/.test(value)) {
+                    const numValue = value === '' ? '' : parseInt(value, 10);
+
+                    // Validate against product count
+                    if (numValue === '' || (numValue >= 1 && numValue <= product.product_count)) {
+                      setSelectCount(numValue === '' ? '' : numValue);
+                    }
+                  }
                 }}
                 onBlur={() => {
                   if (selectCount === '' || selectCount < 1) {
                     setSelectCount(1);
+                  } else if (selectCount > product.product_count) {
+                    setSelectCount(product.product_count);
                   }
                 }}
               />
@@ -243,20 +347,13 @@ const InnerDisplay = () => {
                   <p>BUY</p>
                 </div>
               ) : (
-                <Link to="/cart">
-                  <div
-                    className="buy-btn"
-                  
-                    onClick={() => {
-                    if (handleAddToCart()) {
-                      addToCart(product.id, productSize, selectCount);
-                      handleClick();
-                    }
-                  }}
-                  >
-                    <p>Buy</p>
-                  </div>
-                </Link>
+                <div
+                  className="buy-btn"
+                  onClick={handleBuyNowData}
+                  disabled={isLoading}
+                >
+                  <p>{isLoading ? "Processing..." : "Buy"}</p>
+                </div>
               )}
 
               {product.product_count <= 0 ? (
@@ -266,19 +363,14 @@ const InnerDisplay = () => {
               ) : (
                 <div
                   className="add-cart"
-                  onClick={() => {
-                    if (handleAddToCart()) {
-                      addToCart(product.id, productSize, selectCount);
-                      handleClick();
-                    }
-                  }}
+                  onClick={handleAddToCart}
                 >
                   <p>Add To Cart</p>
                 </div>
               )}
             </div>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {isLoading && <p>Syncing cart...</p>}
+            {isLoading && <p>Processing your order...</p>}
           </div>
         </div>
       </div>
